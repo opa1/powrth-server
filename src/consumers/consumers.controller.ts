@@ -4,7 +4,12 @@ import { Roles } from '../common/decorators/roles.decorator'
 import { AuthGuard } from '../common/guards/auth.guard'
 import { RolesGuard } from '../common/guards/roles.guard'
 import { User } from '../generated/prisma/client'
-import { ConsumerProfile, ConsumerWithUser, ConsumersService } from './consumers.service'
+import {
+  ConsumerMeterItem,
+  ConsumerProfile,
+  ConsumerWithUser,
+  ConsumersService,
+} from './consumers.service'
 
 @Controller('consumers')
 export class ConsumersController {
@@ -16,6 +21,13 @@ export class ConsumersController {
   async me(@CurrentUser() user: User): Promise<ConsumerProfile> {
     const consumer = await this.consumersService.findByUserId(user.id)
     return this.toProfile(consumer)
+  }
+
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles('CONSUMER')
+  @Get('me/meters')
+  async meters(@CurrentUser() user: User): Promise<ConsumerMeterItem[]> {
+    return this.consumersService.getMetersWithBalances(user.id)
   }
 
   private toProfile(consumer: ConsumerWithUser): ConsumerProfile {

@@ -7,8 +7,10 @@ import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe'
 import { User } from '../generated/prisma/client'
 import { UpdateProviderDto, updateProviderSchema } from './dto/update-provider.dto'
 import {
+  ProviderConsumerItem,
   ProviderPrivateProfile,
   ProviderPublicProfile,
+  ProviderSummary,
   ProviderWithUser,
   ProvidersService,
 } from './providers.service'
@@ -48,6 +50,20 @@ export class ProvidersController {
     await this.providersService.updateProfile(user.id, dto)
     const provider = await this.providersService.findByUserId(user.id)
     return this.toPrivateProfile(provider)
+  }
+
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles('PROVIDER')
+  @Get('me/summary')
+  async summary(@CurrentUser() user: User): Promise<ProviderSummary> {
+    return this.providersService.getSummary(user.id)
+  }
+
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles('PROVIDER')
+  @Get('me/consumers')
+  async consumers(@CurrentUser() user: User): Promise<ProviderConsumerItem[]> {
+    return this.providersService.listConsumers(user.id)
   }
 
   @Get(':id')
