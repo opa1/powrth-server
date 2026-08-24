@@ -1,0 +1,81 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+
+# Build and Output
+dist/
+build/
+*.tsbuildinfo
+
+# Environment and Secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+prisma/*.sqlite
+prisma/*.sqlite-journal
+
+# PM2 / Process Managers
+.pm2/
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# IDEs & Editors
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# AI Agents, Rules & Metadata (Hidden from Git)
+CLAUDE.md
+AGENT.md
+AGENTS.md
+.cursorrules
+.windsurfrules
+.agents/
+skills/
+.claude/
+.cursor/
+.gemini/
+.antigravity/
+.copilot/
+.github/copilot-instructions.md
+*.ai
+*.tmp
+*.bak
+
