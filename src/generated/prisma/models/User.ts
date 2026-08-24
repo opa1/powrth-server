@@ -283,6 +283,7 @@ export type UserWhereInput = {
   provider?: Prisma.XOR<Prisma.ProviderNullableScalarRelationFilter, Prisma.ProviderWhereInput> | null
   consumer?: Prisma.XOR<Prisma.ConsumerNullableScalarRelationFilter, Prisma.ConsumerWhereInput> | null
   authSessions?: Prisma.AuthSessionListRelationFilter
+  relayEventsInitiated?: Prisma.RelayEventListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -302,6 +303,7 @@ export type UserOrderByWithRelationInput = {
   provider?: Prisma.ProviderOrderByWithRelationInput
   consumer?: Prisma.ConsumerOrderByWithRelationInput
   authSessions?: Prisma.AuthSessionOrderByRelationAggregateInput
+  relayEventsInitiated?: Prisma.RelayEventOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -324,6 +326,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   provider?: Prisma.XOR<Prisma.ProviderNullableScalarRelationFilter, Prisma.ProviderWhereInput> | null
   consumer?: Prisma.XOR<Prisma.ConsumerNullableScalarRelationFilter, Prisma.ConsumerWhereInput> | null
   authSessions?: Prisma.AuthSessionListRelationFilter
+  relayEventsInitiated?: Prisma.RelayEventListRelationFilter
 }, "id" | "googleId" | "appleId" | "xId" | "email" | "walletAddress" | "walletKeyIndex">
 
 export type UserOrderByWithAggregationInput = {
@@ -383,6 +386,7 @@ export type UserCreateInput = {
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -402,6 +406,7 @@ export type UserUncheckedCreateInput = {
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
 }
 
 export type UserUpdateInput = {
@@ -421,6 +426,7 @@ export type UserUpdateInput = {
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -440,6 +446,7 @@ export type UserUncheckedUpdateInput = {
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -551,6 +558,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -621,6 +633,22 @@ export type UserUpdateOneRequiredWithoutConsumerNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConsumerInput, Prisma.UserUpdateWithoutConsumerInput>, Prisma.UserUncheckedUpdateWithoutConsumerInput>
 }
 
+export type UserCreateNestedOneWithoutRelayEventsInitiatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRelayEventsInitiatedInput, Prisma.UserUncheckedCreateWithoutRelayEventsInitiatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRelayEventsInitiatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutRelayEventsInitiatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRelayEventsInitiatedInput, Prisma.UserUncheckedCreateWithoutRelayEventsInitiatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRelayEventsInitiatedInput
+  upsert?: Prisma.UserUpsertWithoutRelayEventsInitiatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRelayEventsInitiatedInput, Prisma.UserUpdateWithoutRelayEventsInitiatedInput>, Prisma.UserUncheckedUpdateWithoutRelayEventsInitiatedInput>
+}
+
 export type UserCreateWithoutAuthSessionsInput = {
   id?: string
   googleId?: string | null
@@ -637,6 +665,7 @@ export type UserCreateWithoutAuthSessionsInput = {
   updatedAt?: Date | string
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
 }
 
 export type UserUncheckedCreateWithoutAuthSessionsInput = {
@@ -655,6 +684,7 @@ export type UserUncheckedCreateWithoutAuthSessionsInput = {
   updatedAt?: Date | string
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
 }
 
 export type UserCreateOrConnectWithoutAuthSessionsInput = {
@@ -689,6 +719,7 @@ export type UserUpdateWithoutAuthSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthSessionsInput = {
@@ -707,6 +738,7 @@ export type UserUncheckedUpdateWithoutAuthSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
 }
 
 export type UserCreateWithoutProviderInput = {
@@ -725,6 +757,7 @@ export type UserCreateWithoutProviderInput = {
   updatedAt?: Date | string
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
 }
 
 export type UserUncheckedCreateWithoutProviderInput = {
@@ -743,6 +776,7 @@ export type UserUncheckedCreateWithoutProviderInput = {
   updatedAt?: Date | string
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
 }
 
 export type UserCreateOrConnectWithoutProviderInput = {
@@ -777,6 +811,7 @@ export type UserUpdateWithoutProviderInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderInput = {
@@ -795,6 +830,7 @@ export type UserUncheckedUpdateWithoutProviderInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
 }
 
 export type UserCreateWithoutConsumerInput = {
@@ -813,6 +849,7 @@ export type UserCreateWithoutConsumerInput = {
   updatedAt?: Date | string
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
 }
 
 export type UserUncheckedCreateWithoutConsumerInput = {
@@ -831,6 +868,7 @@ export type UserUncheckedCreateWithoutConsumerInput = {
   updatedAt?: Date | string
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
 }
 
 export type UserCreateOrConnectWithoutConsumerInput = {
@@ -865,6 +903,7 @@ export type UserUpdateWithoutConsumerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConsumerInput = {
@@ -883,6 +922,99 @@ export type UserUncheckedUpdateWithoutConsumerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
+}
+
+export type UserCreateWithoutRelayEventsInitiatedInput = {
+  id?: string
+  googleId?: string | null
+  appleId?: string | null
+  xId?: string | null
+  name?: string | null
+  avatar?: string | null
+  email?: string | null
+  walletAddress: string
+  walletKeyIndex: number
+  role?: $Enums.Role | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
+  consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRelayEventsInitiatedInput = {
+  id?: string
+  googleId?: string | null
+  appleId?: string | null
+  xId?: string | null
+  name?: string | null
+  avatar?: string | null
+  email?: string | null
+  walletAddress: string
+  walletKeyIndex: number
+  role?: $Enums.Role | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
+  consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRelayEventsInitiatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRelayEventsInitiatedInput, Prisma.UserUncheckedCreateWithoutRelayEventsInitiatedInput>
+}
+
+export type UserUpsertWithoutRelayEventsInitiatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRelayEventsInitiatedInput, Prisma.UserUncheckedUpdateWithoutRelayEventsInitiatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRelayEventsInitiatedInput, Prisma.UserUncheckedCreateWithoutRelayEventsInitiatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRelayEventsInitiatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRelayEventsInitiatedInput, Prisma.UserUncheckedUpdateWithoutRelayEventsInitiatedInput>
+}
+
+export type UserUpdateWithoutRelayEventsInitiatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  appleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  walletKeyIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
+  consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRelayEventsInitiatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  appleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  walletKeyIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
+  consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -892,10 +1024,12 @@ export type UserUncheckedUpdateWithoutConsumerInput = {
 
 export type UserCountOutputType = {
   authSessions: number
+  relayEventsInitiated: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authSessions?: boolean | UserCountOutputTypeCountAuthSessionsArgs
+  relayEventsInitiated?: boolean | UserCountOutputTypeCountRelayEventsInitiatedArgs
 }
 
 /**
@@ -913,6 +1047,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountAuthSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AuthSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRelayEventsInitiatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RelayEventWhereInput
 }
 
 
@@ -933,6 +1074,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   provider?: boolean | Prisma.User$providerArgs<ExtArgs>
   consumer?: boolean | Prisma.User$consumerArgs<ExtArgs>
   authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
+  relayEventsInitiated?: boolean | Prisma.User$relayEventsInitiatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -989,6 +1131,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   provider?: boolean | Prisma.User$providerArgs<ExtArgs>
   consumer?: boolean | Prisma.User$consumerArgs<ExtArgs>
   authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
+  relayEventsInitiated?: boolean | Prisma.User$relayEventsInitiatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1000,6 +1143,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     provider: Prisma.$ProviderPayload<ExtArgs> | null
     consumer: Prisma.$ConsumerPayload<ExtArgs> | null
     authSessions: Prisma.$AuthSessionPayload<ExtArgs>[]
+    relayEventsInitiated: Prisma.$RelayEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1412,6 +1556,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   provider<T extends Prisma.User$providerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$providerArgs<ExtArgs>>): Prisma.Prisma__ProviderClient<runtime.Types.Result.GetResult<Prisma.$ProviderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   consumer<T extends Prisma.User$consumerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$consumerArgs<ExtArgs>>): Prisma.Prisma__ConsumerClient<runtime.Types.Result.GetResult<Prisma.$ConsumerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   authSessions<T extends Prisma.User$authSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relayEventsInitiated<T extends Prisma.User$relayEventsInitiatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$relayEventsInitiatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RelayEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1906,6 +2051,30 @@ export type User$authSessionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.AuthSessionScalarFieldEnum | Prisma.AuthSessionScalarFieldEnum[]
+}
+
+/**
+ * User.relayEventsInitiated
+ */
+export type User$relayEventsInitiatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RelayEvent
+   */
+  select?: Prisma.RelayEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RelayEvent
+   */
+  omit?: Prisma.RelayEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RelayEventInclude<ExtArgs> | null
+  where?: Prisma.RelayEventWhereInput
+  orderBy?: Prisma.RelayEventOrderByWithRelationInput | Prisma.RelayEventOrderByWithRelationInput[]
+  cursor?: Prisma.RelayEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RelayEventScalarFieldEnum | Prisma.RelayEventScalarFieldEnum[]
 }
 
 /**

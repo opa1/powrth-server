@@ -16,3 +16,54 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const MeterStatus = {
+  ONLINE: 'ONLINE',
+  OFFLINE: 'OFFLINE',
+  UNKNOWN: 'UNKNOWN'
+} as const
+
+export type MeterStatus = (typeof MeterStatus)[keyof typeof MeterStatus]
+
+
+export const RelayState = {
+  ON: 'ON',
+  OFF: 'OFF',
+  UNKNOWN: 'UNKNOWN'
+} as const
+
+export type RelayState = (typeof RelayState)[keyof typeof RelayState]
+
+
+export const RelayAction = {
+  TRIP: 'TRIP',
+  CLOSE: 'CLOSE'
+} as const
+
+export type RelayAction = (typeof RelayAction)[keyof typeof RelayAction]
+
+
+export const RelayTrigger = {
+  BALANCE_DEPLETED_METER: 'BALANCE_DEPLETED_METER',
+  BALANCE_DEPLETED_SERVER: 'BALANCE_DEPLETED_SERVER',
+  TOPUP_RECONNECT: 'TOPUP_RECONNECT',
+  MANUAL_PROVIDER: 'MANUAL_PROVIDER',
+  MANUAL_ADMIN: 'MANUAL_ADMIN'
+} as const
+
+export type RelayTrigger = (typeof RelayTrigger)[keyof typeof RelayTrigger]
+
+
+export const MeterEventType = {
+  CONNECTED: 'CONNECTED',
+  DISCONNECTED: 'DISCONNECTED',
+  LOGIN: 'LOGIN',
+  HEARTBEAT: 'HEARTBEAT',
+  ENERGY_REPORT: 'ENERGY_REPORT',
+  RELAY_COMMAND_SENT: 'RELAY_COMMAND_SENT',
+  RELAY_COMMAND_ACK: 'RELAY_COMMAND_ACK',
+  RELAY_COMMAND_FAILED: 'RELAY_COMMAND_FAILED'
+} as const
+
+export type MeterEventType = (typeof MeterEventType)[keyof typeof MeterEventType]

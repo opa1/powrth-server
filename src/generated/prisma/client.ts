@@ -59,3 +59,23 @@ export type Provider = Prisma.ProviderModel
  * 
  */
 export type Consumer = Prisma.ConsumerModel
+/**
+ * Model Meter
+ * 
+ */
+export type Meter = Prisma.MeterModel
+/**
+ * Model MeterReading
+ * 
+ */
+export type MeterReading = Prisma.MeterReadingModel
+/**
+ * Model RelayEvent
+ * 
+ */
+export type RelayEvent = Prisma.RelayEventModel
+/**
+ * Model MeterEvent
+ * 
+ */
+export type MeterEvent = Prisma.MeterEventModel

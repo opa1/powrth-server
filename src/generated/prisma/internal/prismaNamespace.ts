@@ -400,7 +400,11 @@ export const ModelName = {
   User: 'User',
   AuthSession: 'AuthSession',
   Provider: 'Provider',
-  Consumer: 'Consumer'
+  Consumer: 'Consumer',
+  Meter: 'Meter',
+  MeterReading: 'MeterReading',
+  RelayEvent: 'RelayEvent',
+  MeterEvent: 'MeterEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -416,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "authSession" | "provider" | "consumer"
+    modelProps: "user" | "authSession" | "provider" | "consumer" | "meter" | "meterReading" | "relayEvent" | "meterEvent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -716,6 +720,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Meter: {
+      payload: Prisma.$MeterPayload<ExtArgs>
+      fields: Prisma.MeterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MeterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MeterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        findFirst: {
+          args: Prisma.MeterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MeterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        findMany: {
+          args: Prisma.MeterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>[]
+        }
+        create: {
+          args: Prisma.MeterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        createMany: {
+          args: Prisma.MeterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MeterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>[]
+        }
+        delete: {
+          args: Prisma.MeterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        update: {
+          args: Prisma.MeterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        deleteMany: {
+          args: Prisma.MeterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MeterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MeterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>[]
+        }
+        upsert: {
+          args: Prisma.MeterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterPayload>
+        }
+        aggregate: {
+          args: Prisma.MeterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMeter>
+        }
+        groupBy: {
+          args: Prisma.MeterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MeterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterCountAggregateOutputType> | number
+        }
+      }
+    }
+    MeterReading: {
+      payload: Prisma.$MeterReadingPayload<ExtArgs>
+      fields: Prisma.MeterReadingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MeterReadingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MeterReadingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        findFirst: {
+          args: Prisma.MeterReadingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MeterReadingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        findMany: {
+          args: Prisma.MeterReadingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>[]
+        }
+        create: {
+          args: Prisma.MeterReadingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        createMany: {
+          args: Prisma.MeterReadingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MeterReadingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>[]
+        }
+        delete: {
+          args: Prisma.MeterReadingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        update: {
+          args: Prisma.MeterReadingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        deleteMany: {
+          args: Prisma.MeterReadingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MeterReadingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MeterReadingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>[]
+        }
+        upsert: {
+          args: Prisma.MeterReadingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterReadingPayload>
+        }
+        aggregate: {
+          args: Prisma.MeterReadingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMeterReading>
+        }
+        groupBy: {
+          args: Prisma.MeterReadingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterReadingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MeterReadingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterReadingCountAggregateOutputType> | number
+        }
+      }
+    }
+    RelayEvent: {
+      payload: Prisma.$RelayEventPayload<ExtArgs>
+      fields: Prisma.RelayEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RelayEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RelayEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>
+        }
+        findFirst: {
+          args: Prisma.RelayEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RelayEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>
+        }
+        findMany: {
+          args: Prisma.RelayEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>[]
+        }
+        create: {
+          args: Prisma.RelayEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>
+        }
+        createMany: {
+          args: Prisma.RelayEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RelayEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>[]
+        }
+        delete: {
+          args: Prisma.RelayEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>
+        }
+        update: {
+          args: Prisma.RelayEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.RelayEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RelayEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RelayEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.RelayEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RelayEventPayload>
+        }
+        aggregate: {
+          args: Prisma.RelayEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRelayEvent>
+        }
+        groupBy: {
+          args: Prisma.RelayEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RelayEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RelayEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RelayEventCountAggregateOutputType> | number
+        }
+      }
+    }
+    MeterEvent: {
+      payload: Prisma.$MeterEventPayload<ExtArgs>
+      fields: Prisma.MeterEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MeterEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MeterEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>
+        }
+        findFirst: {
+          args: Prisma.MeterEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MeterEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>
+        }
+        findMany: {
+          args: Prisma.MeterEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>[]
+        }
+        create: {
+          args: Prisma.MeterEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>
+        }
+        createMany: {
+          args: Prisma.MeterEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MeterEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>[]
+        }
+        delete: {
+          args: Prisma.MeterEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>
+        }
+        update: {
+          args: Prisma.MeterEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.MeterEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MeterEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MeterEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.MeterEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeterEventPayload>
+        }
+        aggregate: {
+          args: Prisma.MeterEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMeterEvent>
+        }
+        groupBy: {
+          args: Prisma.MeterEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MeterEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeterEventCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -810,12 +1110,83 @@ export const ConsumerScalarFieldEnum = {
 export type ConsumerScalarFieldEnum = (typeof ConsumerScalarFieldEnum)[keyof typeof ConsumerScalarFieldEnum]
 
 
+export const MeterScalarFieldEnum = {
+  id: 'id',
+  meterAddr: 'meterAddr',
+  serial: 'serial',
+  imei: 'imei',
+  iccid: 'iccid',
+  softVer: 'softVer',
+  providerId: 'providerId',
+  consumerId: 'consumerId',
+  status: 'status',
+  relayState: 'relayState',
+  pricePerKwh: 'pricePerKwh',
+  lastSeen: 'lastSeen',
+  installedAt: 'installedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeterScalarFieldEnum = (typeof MeterScalarFieldEnum)[keyof typeof MeterScalarFieldEnum]
+
+
+export const MeterReadingScalarFieldEnum = {
+  id: 'id',
+  meterId: 'meterId',
+  voltageA: 'voltageA',
+  currentA: 'currentA',
+  activePower: 'activePower',
+  totalEnergy: 'totalEnergy',
+  remainingKwh: 'remainingKwh',
+  relayState: 'relayState',
+  signal: 'signal',
+  rawFrame: 'rawFrame',
+  readAt: 'readAt'
+} as const
+
+export type MeterReadingScalarFieldEnum = (typeof MeterReadingScalarFieldEnum)[keyof typeof MeterReadingScalarFieldEnum]
+
+
+export const RelayEventScalarFieldEnum = {
+  id: 'id',
+  meterId: 'meterId',
+  action: 'action',
+  trigger: 'trigger',
+  initiatedByUserId: 'initiatedByUserId',
+  commandSentAt: 'commandSentAt',
+  acknowledgedAt: 'acknowledgedAt',
+  success: 'success',
+  createdAt: 'createdAt'
+} as const
+
+export type RelayEventScalarFieldEnum = (typeof RelayEventScalarFieldEnum)[keyof typeof RelayEventScalarFieldEnum]
+
+
+export const MeterEventScalarFieldEnum = {
+  id: 'id',
+  meterId: 'meterId',
+  type: 'type',
+  payload: 'payload',
+  createdAt: 'createdAt'
+} as const
+
+export type MeterEventScalarFieldEnum = (typeof MeterEventScalarFieldEnum)[keyof typeof MeterEventScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -832,6 +1203,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -914,6 +1294,90 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MeterStatus'
+ */
+export type EnumMeterStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeterStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MeterStatus[]'
+ */
+export type ListEnumMeterStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeterStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RelayState'
+ */
+export type EnumRelayStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelayState'>
+    
+
+
+/**
+ * Reference to a field of type 'RelayState[]'
+ */
+export type ListEnumRelayStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelayState[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RelayAction'
+ */
+export type EnumRelayActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelayAction'>
+    
+
+
+/**
+ * Reference to a field of type 'RelayAction[]'
+ */
+export type ListEnumRelayActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelayAction[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RelayTrigger'
+ */
+export type EnumRelayTriggerFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelayTrigger'>
+    
+
+
+/**
+ * Reference to a field of type 'RelayTrigger[]'
+ */
+export type ListEnumRelayTriggerFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RelayTrigger[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MeterEventType'
+ */
+export type EnumMeterEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeterEventType'>
+    
+
+
+/**
+ * Reference to a field of type 'MeterEventType[]'
+ */
+export type ListEnumMeterEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeterEventType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -1085,6 +1549,10 @@ export type GlobalOmitConfig = {
   authSession?: Prisma.AuthSessionOmit
   provider?: Prisma.ProviderOmit
   consumer?: Prisma.ConsumerOmit
+  meter?: Prisma.MeterOmit
+  meterReading?: Prisma.MeterReadingOmit
+  relayEvent?: Prisma.RelayEventOmit
+  meterEvent?: Prisma.MeterEventOmit
 }
 
 /* Types for Logging */

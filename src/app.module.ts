@@ -4,6 +4,7 @@ import { ConfigModule } from './config/config.module'
 import { ConsumersModule } from './consumers/consumers.module'
 import { DatabaseModule } from './database/database.module'
 import { HealthModule } from './health/health.module'
+import { MetersModule } from './meters/meters.module'
 import { ProvidersModule } from './providers/providers.module'
 import { UsersModule } from './users/users.module'
 import { WalletModule } from './wallet/wallet.module'
@@ -17,6 +18,7 @@ import { WalletModule } from './wallet/wallet.module'
     WalletModule,
     ProvidersModule,
     ConsumersModule,
+    MetersModule,
     HealthModule,
   ],
 })

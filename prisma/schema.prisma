@@ -29,9 +29,10 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  provider     Provider?
-  consumer     Consumer?
-  authSessions AuthSession[]
+  provider             Provider?
+  consumer             Consumer?
+  authSessions         AuthSession[]
+  relayEventsInitiated RelayEvent[]  @relation("RelayInitiator")
 }
 
 model AuthSession {
@@ -57,6 +58,8 @@ model Provider {
   isVerified     Boolean  @default(false)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+
+  meters Meter[]
 }
 
 model Consumer {
@@ -65,4 +68,116 @@ model Consumer {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  meters Meter[]
+}
+
+enum MeterStatus {
+  ONLINE
+  OFFLINE
+  UNKNOWN
+}
+
+enum RelayState {
+  ON
+  OFF
+  UNKNOWN
+}
+
+enum RelayAction {
+  TRIP
+  CLOSE
+}
+
+enum RelayTrigger {
+  BALANCE_DEPLETED_METER
+  BALANCE_DEPLETED_SERVER
+  TOPUP_RECONNECT
+  MANUAL_PROVIDER
+  MANUAL_ADMIN
+}
+
+enum MeterEventType {
+  CONNECTED
+  DISCONNECTED
+  LOGIN
+  HEARTBEAT
+  ENERGY_REPORT
+  RELAY_COMMAND_SENT
+  RELAY_COMMAND_ACK
+  RELAY_COMMAND_FAILED
+}
+
+model Meter {
+  id          String      @id @default(uuid())
+  meterAddr   String      @unique // 12-char hex e.g. "202108100034"
+  serial      String?     @unique
+  imei        String?     @unique
+  iccid       String?
+  softVer     String?
+  // Nullable: a meter reports over TCP and exists in the DB before any provider claims it.
+  providerId  String?
+  provider    Provider?   @relation(fields: [providerId], references: [id])
+  consumerId  String?
+  consumer    Consumer?   @relation(fields: [consumerId], references: [id])
+  status      MeterStatus @default(UNKNOWN)
+  relayState  RelayState  @default(UNKNOWN)
+  pricePerKwh Decimal?    @db.Decimal(10, 6) // overrides provider default when set
+  lastSeen    DateTime?
+  installedAt DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  readings    MeterReading[]
+  relayEvents RelayEvent[]
+  meterEvents MeterEvent[]
+
+  @@index([providerId])
+  @@index([consumerId])
+}
+
+model MeterReading {
+  id           String     @id @default(uuid())
+  meterId      String
+  meter        Meter      @relation(fields: [meterId], references: [id])
+  voltageA     Decimal    @db.Decimal(8, 2)
+  currentA     Decimal    @db.Decimal(8, 3)
+  activePower  Decimal    @db.Decimal(10, 2) // watts
+  totalEnergy  Decimal    @db.Decimal(12, 4) // cumulative kWh from meter
+  remainingKwh Decimal    @db.Decimal(12, 4) // balance reported by meter
+  relayState   RelayState
+  signal       Int
+  rawFrame     String? // full hex frame for debugging
+  readAt       DateTime   @default(now())
+
+  @@index([meterId])
+  @@index([readAt])
+}
+
+model RelayEvent {
+  id                String       @id @default(uuid())
+  meterId           String
+  meter             Meter        @relation(fields: [meterId], references: [id])
+  action            RelayAction
+  trigger           RelayTrigger
+  initiatedByUserId String?
+  initiatedBy       User?        @relation("RelayInitiator", fields: [initiatedByUserId], references: [id])
+  commandSentAt     DateTime     @default(now())
+  acknowledgedAt    DateTime?
+  success           Boolean      @default(false)
+  createdAt         DateTime     @default(now())
+
+  @@index([meterId])
+}
+
+model MeterEvent {
+  id        String         @id @default(uuid())
+  meterId   String
+  meter     Meter          @relation(fields: [meterId], references: [id])
+  type      MeterEventType
+  payload   Json
+  createdAt DateTime       @default(now())
+
+  @@index([meterId])
+  @@index([createdAt])
 }

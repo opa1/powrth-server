@@ -175,6 +175,7 @@ export type ConsumerWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Consumer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Consumer"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  meters?: Prisma.MeterListRelationFilter
 }
 
 export type ConsumerOrderByWithRelationInput = {
@@ -183,6 +184,7 @@ export type ConsumerOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  meters?: Prisma.MeterOrderByRelationAggregateInput
 }
 
 export type ConsumerWhereUniqueInput = Prisma.AtLeast<{
@@ -194,6 +196,7 @@ export type ConsumerWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Consumer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Consumer"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  meters?: Prisma.MeterListRelationFilter
 }, "id" | "userId">
 
 export type ConsumerOrderByWithAggregationInput = {
@@ -221,6 +224,7 @@ export type ConsumerCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutConsumerInput
+  meters?: Prisma.MeterCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerUncheckedCreateInput = {
@@ -228,6 +232,7 @@ export type ConsumerUncheckedCreateInput = {
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  meters?: Prisma.MeterUncheckedCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerUpdateInput = {
@@ -235,6 +240,7 @@ export type ConsumerUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutConsumerNestedInput
+  meters?: Prisma.MeterUpdateManyWithoutConsumerNestedInput
 }
 
 export type ConsumerUncheckedUpdateInput = {
@@ -242,6 +248,7 @@ export type ConsumerUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meters?: Prisma.MeterUncheckedUpdateManyWithoutConsumerNestedInput
 }
 
 export type ConsumerCreateManyInput = {
@@ -322,16 +329,34 @@ export type ConsumerUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConsumerUpdateToOneWithWhereWithoutUserInput, Prisma.ConsumerUpdateWithoutUserInput>, Prisma.ConsumerUncheckedUpdateWithoutUserInput>
 }
 
+export type ConsumerCreateNestedOneWithoutMetersInput = {
+  create?: Prisma.XOR<Prisma.ConsumerCreateWithoutMetersInput, Prisma.ConsumerUncheckedCreateWithoutMetersInput>
+  connectOrCreate?: Prisma.ConsumerCreateOrConnectWithoutMetersInput
+  connect?: Prisma.ConsumerWhereUniqueInput
+}
+
+export type ConsumerUpdateOneWithoutMetersNestedInput = {
+  create?: Prisma.XOR<Prisma.ConsumerCreateWithoutMetersInput, Prisma.ConsumerUncheckedCreateWithoutMetersInput>
+  connectOrCreate?: Prisma.ConsumerCreateOrConnectWithoutMetersInput
+  upsert?: Prisma.ConsumerUpsertWithoutMetersInput
+  disconnect?: Prisma.ConsumerWhereInput | boolean
+  delete?: Prisma.ConsumerWhereInput | boolean
+  connect?: Prisma.ConsumerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ConsumerUpdateToOneWithWhereWithoutMetersInput, Prisma.ConsumerUpdateWithoutMetersInput>, Prisma.ConsumerUncheckedUpdateWithoutMetersInput>
+}
+
 export type ConsumerCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  meters?: Prisma.MeterCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerUncheckedCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  meters?: Prisma.MeterUncheckedCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerCreateOrConnectWithoutUserInput = {
@@ -354,14 +379,89 @@ export type ConsumerUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meters?: Prisma.MeterUpdateManyWithoutConsumerNestedInput
 }
 
 export type ConsumerUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meters?: Prisma.MeterUncheckedUpdateManyWithoutConsumerNestedInput
 }
 
+export type ConsumerCreateWithoutMetersInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutConsumerInput
+}
+
+export type ConsumerUncheckedCreateWithoutMetersInput = {
+  id?: string
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ConsumerCreateOrConnectWithoutMetersInput = {
+  where: Prisma.ConsumerWhereUniqueInput
+  create: Prisma.XOR<Prisma.ConsumerCreateWithoutMetersInput, Prisma.ConsumerUncheckedCreateWithoutMetersInput>
+}
+
+export type ConsumerUpsertWithoutMetersInput = {
+  update: Prisma.XOR<Prisma.ConsumerUpdateWithoutMetersInput, Prisma.ConsumerUncheckedUpdateWithoutMetersInput>
+  create: Prisma.XOR<Prisma.ConsumerCreateWithoutMetersInput, Prisma.ConsumerUncheckedCreateWithoutMetersInput>
+  where?: Prisma.ConsumerWhereInput
+}
+
+export type ConsumerUpdateToOneWithWhereWithoutMetersInput = {
+  where?: Prisma.ConsumerWhereInput
+  data: Prisma.XOR<Prisma.ConsumerUpdateWithoutMetersInput, Prisma.ConsumerUncheckedUpdateWithoutMetersInput>
+}
+
+export type ConsumerUpdateWithoutMetersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutConsumerNestedInput
+}
+
+export type ConsumerUncheckedUpdateWithoutMetersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type ConsumerCountOutputType
+ */
+
+export type ConsumerCountOutputType = {
+  meters: number
+}
+
+export type ConsumerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  meters?: boolean | ConsumerCountOutputTypeCountMetersArgs
+}
+
+/**
+ * ConsumerCountOutputType without action
+ */
+export type ConsumerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConsumerCountOutputType
+   */
+  select?: Prisma.ConsumerCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ConsumerCountOutputType without action
+ */
+export type ConsumerCountOutputTypeCountMetersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MeterWhereInput
+}
 
 
 export type ConsumerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -370,6 +470,8 @@ export type ConsumerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  meters?: boolean | Prisma.Consumer$metersArgs<ExtArgs>
+  _count?: boolean | Prisma.ConsumerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consumer"]>
 
 export type ConsumerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -398,6 +500,8 @@ export type ConsumerSelectScalar = {
 export type ConsumerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["consumer"]>
 export type ConsumerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  meters?: boolean | Prisma.Consumer$metersArgs<ExtArgs>
+  _count?: boolean | Prisma.ConsumerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ConsumerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -410,6 +514,7 @@ export type $ConsumerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Consumer"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    meters: Prisma.$MeterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -811,6 +916,7 @@ readonly fields: ConsumerFieldRefs;
 export interface Prisma__ConsumerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  meters<T extends Prisma.Consumer$metersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consumer$metersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1242,6 +1348,30 @@ export type ConsumerDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Consumers to delete.
    */
   limit?: number
+}
+
+/**
+ * Consumer.meters
+ */
+export type Consumer$metersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Meter
+   */
+  select?: Prisma.MeterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Meter
+   */
+  omit?: Prisma.MeterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MeterInclude<ExtArgs> | null
+  where?: Prisma.MeterWhereInput
+  orderBy?: Prisma.MeterOrderByWithRelationInput | Prisma.MeterOrderByWithRelationInput[]
+  cursor?: Prisma.MeterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MeterScalarFieldEnum | Prisma.MeterScalarFieldEnum[]
 }
 
 /**

@@ -54,7 +54,11 @@ export const ModelName = {
   User: 'User',
   AuthSession: 'AuthSession',
   Provider: 'Provider',
-  Consumer: 'Consumer'
+  Consumer: 'Consumer',
+  Meter: 'Meter',
+  MeterReading: 'MeterReading',
+  RelayEvent: 'RelayEvent',
+  MeterEvent: 'MeterEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -128,12 +132,83 @@ export const ConsumerScalarFieldEnum = {
 export type ConsumerScalarFieldEnum = (typeof ConsumerScalarFieldEnum)[keyof typeof ConsumerScalarFieldEnum]
 
 
+export const MeterScalarFieldEnum = {
+  id: 'id',
+  meterAddr: 'meterAddr',
+  serial: 'serial',
+  imei: 'imei',
+  iccid: 'iccid',
+  softVer: 'softVer',
+  providerId: 'providerId',
+  consumerId: 'consumerId',
+  status: 'status',
+  relayState: 'relayState',
+  pricePerKwh: 'pricePerKwh',
+  lastSeen: 'lastSeen',
+  installedAt: 'installedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeterScalarFieldEnum = (typeof MeterScalarFieldEnum)[keyof typeof MeterScalarFieldEnum]
+
+
+export const MeterReadingScalarFieldEnum = {
+  id: 'id',
+  meterId: 'meterId',
+  voltageA: 'voltageA',
+  currentA: 'currentA',
+  activePower: 'activePower',
+  totalEnergy: 'totalEnergy',
+  remainingKwh: 'remainingKwh',
+  relayState: 'relayState',
+  signal: 'signal',
+  rawFrame: 'rawFrame',
+  readAt: 'readAt'
+} as const
+
+export type MeterReadingScalarFieldEnum = (typeof MeterReadingScalarFieldEnum)[keyof typeof MeterReadingScalarFieldEnum]
+
+
+export const RelayEventScalarFieldEnum = {
+  id: 'id',
+  meterId: 'meterId',
+  action: 'action',
+  trigger: 'trigger',
+  initiatedByUserId: 'initiatedByUserId',
+  commandSentAt: 'commandSentAt',
+  acknowledgedAt: 'acknowledgedAt',
+  success: 'success',
+  createdAt: 'createdAt'
+} as const
+
+export type RelayEventScalarFieldEnum = (typeof RelayEventScalarFieldEnum)[keyof typeof RelayEventScalarFieldEnum]
+
+
+export const MeterEventScalarFieldEnum = {
+  id: 'id',
+  meterId: 'meterId',
+  type: 'type',
+  payload: 'payload',
+  createdAt: 'createdAt'
+} as const
+
+export type MeterEventScalarFieldEnum = (typeof MeterEventScalarFieldEnum)[keyof typeof MeterEventScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -150,4 +225,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

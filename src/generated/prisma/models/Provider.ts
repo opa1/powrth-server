@@ -257,6 +257,7 @@ export type ProviderWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Provider"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Provider"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  meters?: Prisma.MeterListRelationFilter
 }
 
 export type ProviderOrderByWithRelationInput = {
@@ -270,6 +271,7 @@ export type ProviderOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  meters?: Prisma.MeterOrderByRelationAggregateInput
 }
 
 export type ProviderWhereUniqueInput = Prisma.AtLeast<{
@@ -286,6 +288,7 @@ export type ProviderWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Provider"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Provider"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  meters?: Prisma.MeterListRelationFilter
 }, "id" | "userId">
 
 export type ProviderOrderByWithAggregationInput = {
@@ -330,6 +333,7 @@ export type ProviderCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProviderInput
+  meters?: Prisma.MeterCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderUncheckedCreateInput = {
@@ -342,6 +346,7 @@ export type ProviderUncheckedCreateInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  meters?: Prisma.MeterUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderUpdateInput = {
@@ -354,6 +359,7 @@ export type ProviderUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
+  meters?: Prisma.MeterUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderUncheckedUpdateInput = {
@@ -366,6 +372,7 @@ export type ProviderUncheckedUpdateInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meters?: Prisma.MeterUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderCreateManyInput = {
@@ -496,6 +503,22 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type ProviderCreateNestedOneWithoutMetersInput = {
+  create?: Prisma.XOR<Prisma.ProviderCreateWithoutMetersInput, Prisma.ProviderUncheckedCreateWithoutMetersInput>
+  connectOrCreate?: Prisma.ProviderCreateOrConnectWithoutMetersInput
+  connect?: Prisma.ProviderWhereUniqueInput
+}
+
+export type ProviderUpdateOneWithoutMetersNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderCreateWithoutMetersInput, Prisma.ProviderUncheckedCreateWithoutMetersInput>
+  connectOrCreate?: Prisma.ProviderCreateOrConnectWithoutMetersInput
+  upsert?: Prisma.ProviderUpsertWithoutMetersInput
+  disconnect?: Prisma.ProviderWhereInput | boolean
+  delete?: Prisma.ProviderWhereInput | boolean
+  connect?: Prisma.ProviderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderUpdateToOneWithWhereWithoutMetersInput, Prisma.ProviderUpdateWithoutMetersInput>, Prisma.ProviderUncheckedUpdateWithoutMetersInput>
+}
+
 export type ProviderCreateWithoutUserInput = {
   id?: string
   businessName?: string | null
@@ -505,6 +528,7 @@ export type ProviderCreateWithoutUserInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  meters?: Prisma.MeterCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderUncheckedCreateWithoutUserInput = {
@@ -516,6 +540,7 @@ export type ProviderUncheckedCreateWithoutUserInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  meters?: Prisma.MeterUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderCreateOrConnectWithoutUserInput = {
@@ -543,6 +568,7 @@ export type ProviderUpdateWithoutUserInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meters?: Prisma.MeterUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderUncheckedUpdateWithoutUserInput = {
@@ -554,8 +580,102 @@ export type ProviderUncheckedUpdateWithoutUserInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meters?: Prisma.MeterUncheckedUpdateManyWithoutProviderNestedInput
 }
 
+export type ProviderCreateWithoutMetersInput = {
+  id?: string
+  businessName?: string | null
+  pricePerKwh?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalEarned?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalWithdrawn?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProviderInput
+}
+
+export type ProviderUncheckedCreateWithoutMetersInput = {
+  id?: string
+  userId: string
+  businessName?: string | null
+  pricePerKwh?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalEarned?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalWithdrawn?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ProviderCreateOrConnectWithoutMetersInput = {
+  where: Prisma.ProviderWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderCreateWithoutMetersInput, Prisma.ProviderUncheckedCreateWithoutMetersInput>
+}
+
+export type ProviderUpsertWithoutMetersInput = {
+  update: Prisma.XOR<Prisma.ProviderUpdateWithoutMetersInput, Prisma.ProviderUncheckedUpdateWithoutMetersInput>
+  create: Prisma.XOR<Prisma.ProviderCreateWithoutMetersInput, Prisma.ProviderUncheckedCreateWithoutMetersInput>
+  where?: Prisma.ProviderWhereInput
+}
+
+export type ProviderUpdateToOneWithWhereWithoutMetersInput = {
+  where?: Prisma.ProviderWhereInput
+  data: Prisma.XOR<Prisma.ProviderUpdateWithoutMetersInput, Prisma.ProviderUncheckedUpdateWithoutMetersInput>
+}
+
+export type ProviderUpdateWithoutMetersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePerKwh?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalEarned?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalWithdrawn?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
+}
+
+export type ProviderUncheckedUpdateWithoutMetersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePerKwh?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalEarned?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalWithdrawn?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type ProviderCountOutputType
+ */
+
+export type ProviderCountOutputType = {
+  meters: number
+}
+
+export type ProviderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  meters?: boolean | ProviderCountOutputTypeCountMetersArgs
+}
+
+/**
+ * ProviderCountOutputType without action
+ */
+export type ProviderCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProviderCountOutputType
+   */
+  select?: Prisma.ProviderCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProviderCountOutputType without action
+ */
+export type ProviderCountOutputTypeCountMetersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MeterWhereInput
+}
 
 
 export type ProviderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -569,6 +689,8 @@ export type ProviderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  meters?: boolean | Prisma.Provider$metersArgs<ExtArgs>
+  _count?: boolean | Prisma.ProviderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["provider"]>
 
 export type ProviderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -612,6 +734,8 @@ export type ProviderSelectScalar = {
 export type ProviderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "businessName" | "pricePerKwh" | "totalEarned" | "totalWithdrawn" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["provider"]>
 export type ProviderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  meters?: boolean | Prisma.Provider$metersArgs<ExtArgs>
+  _count?: boolean | Prisma.ProviderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProviderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -624,6 +748,7 @@ export type $ProviderPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Provider"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    meters: Prisma.$MeterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1030,6 +1155,7 @@ readonly fields: ProviderFieldRefs;
 export interface Prisma__ProviderClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  meters<T extends Prisma.Provider$metersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Provider$metersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1466,6 +1592,30 @@ export type ProviderDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Providers to delete.
    */
   limit?: number
+}
+
+/**
+ * Provider.meters
+ */
+export type Provider$metersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Meter
+   */
+  select?: Prisma.MeterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Meter
+   */
+  omit?: Prisma.MeterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MeterInclude<ExtArgs> | null
+  where?: Prisma.MeterWhereInput
+  orderBy?: Prisma.MeterOrderByWithRelationInput | Prisma.MeterOrderByWithRelationInput[]
+  cursor?: Prisma.MeterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MeterScalarFieldEnum | Prisma.MeterScalarFieldEnum[]
 }
 
 /**
