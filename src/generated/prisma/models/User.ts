@@ -28,10 +28,12 @@ export type AggregateUser = {
 
 export type UserAvgAggregateOutputType = {
   walletKeyIndex: number | null
+  usdcBalance: runtime.Decimal | null
 }
 
 export type UserSumAggregateOutputType = {
   walletKeyIndex: number | null
+  usdcBalance: runtime.Decimal | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -48,6 +50,7 @@ export type UserMinAggregateOutputType = {
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  usdcBalance: runtime.Decimal | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -64,6 +67,7 @@ export type UserMaxAggregateOutputType = {
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  usdcBalance: runtime.Decimal | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -80,16 +84,19 @@ export type UserCountAggregateOutputType = {
   isActive: number
   createdAt: number
   updatedAt: number
+  usdcBalance: number
   _all: number
 }
 
 
 export type UserAvgAggregateInputType = {
   walletKeyIndex?: true
+  usdcBalance?: true
 }
 
 export type UserSumAggregateInputType = {
   walletKeyIndex?: true
+  usdcBalance?: true
 }
 
 export type UserMinAggregateInputType = {
@@ -106,6 +113,7 @@ export type UserMinAggregateInputType = {
   isActive?: true
   createdAt?: true
   updatedAt?: true
+  usdcBalance?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -122,6 +130,7 @@ export type UserMaxAggregateInputType = {
   isActive?: true
   createdAt?: true
   updatedAt?: true
+  usdcBalance?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -138,6 +147,7 @@ export type UserCountAggregateInputType = {
   isActive?: true
   createdAt?: true
   updatedAt?: true
+  usdcBalance?: true
   _all?: true
 }
 
@@ -241,6 +251,7 @@ export type UserGroupByOutputType = {
   isActive: boolean
   createdAt: Date
   updatedAt: Date
+  usdcBalance: runtime.Decimal
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -280,11 +291,13 @@ export type UserWhereInput = {
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  usdcBalance?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.XOR<Prisma.ProviderNullableScalarRelationFilter, Prisma.ProviderWhereInput> | null
   consumer?: Prisma.XOR<Prisma.ConsumerNullableScalarRelationFilter, Prisma.ConsumerWhereInput> | null
   authSessions?: Prisma.AuthSessionListRelationFilter
   relayEventsInitiated?: Prisma.RelayEventListRelationFilter
   transactionsLoaded?: Prisma.TransactionListRelationFilter
+  walletDeposits?: Prisma.WalletDepositListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -301,11 +314,13 @@ export type UserOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  usdcBalance?: Prisma.SortOrder
   provider?: Prisma.ProviderOrderByWithRelationInput
   consumer?: Prisma.ConsumerOrderByWithRelationInput
   authSessions?: Prisma.AuthSessionOrderByRelationAggregateInput
   relayEventsInitiated?: Prisma.RelayEventOrderByRelationAggregateInput
   transactionsLoaded?: Prisma.TransactionOrderByRelationAggregateInput
+  walletDeposits?: Prisma.WalletDepositOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -325,11 +340,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  usdcBalance?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.XOR<Prisma.ProviderNullableScalarRelationFilter, Prisma.ProviderWhereInput> | null
   consumer?: Prisma.XOR<Prisma.ConsumerNullableScalarRelationFilter, Prisma.ConsumerWhereInput> | null
   authSessions?: Prisma.AuthSessionListRelationFilter
   relayEventsInitiated?: Prisma.RelayEventListRelationFilter
   transactionsLoaded?: Prisma.TransactionListRelationFilter
+  walletDeposits?: Prisma.WalletDepositListRelationFilter
 }, "id" | "googleId" | "appleId" | "xId" | "email" | "walletAddress" | "walletKeyIndex">
 
 export type UserOrderByWithAggregationInput = {
@@ -346,6 +363,7 @@ export type UserOrderByWithAggregationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  usdcBalance?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -370,6 +388,7 @@ export type UserScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  usdcBalance?: Prisma.DecimalWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserCreateInput = {
@@ -386,11 +405,13 @@ export type UserCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
   transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -407,11 +428,13 @@ export type UserUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
   transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -428,11 +451,13 @@ export type UserUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
   transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -449,11 +474,13 @@ export type UserUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
   transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -470,6 +497,7 @@ export type UserCreateManyInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -486,6 +514,7 @@ export type UserUpdateManyMutationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -502,6 +531,7 @@ export type UserUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -518,10 +548,12 @@ export type UserCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  usdcBalance?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
   walletKeyIndex?: Prisma.SortOrder
+  usdcBalance?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -538,6 +570,7 @@ export type UserMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  usdcBalance?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -554,10 +587,12 @@ export type UserMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  usdcBalance?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
   walletKeyIndex?: Prisma.SortOrder
+  usdcBalance?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -596,6 +631,14 @@ export type BoolFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserCreateNestedOneWithoutAuthSessionsInput = {
@@ -672,6 +715,20 @@ export type UserUpdateOneWithoutTransactionsLoadedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTransactionsLoadedInput, Prisma.UserUpdateWithoutTransactionsLoadedInput>, Prisma.UserUncheckedUpdateWithoutTransactionsLoadedInput>
 }
 
+export type UserCreateNestedOneWithoutWalletDepositsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWalletDepositsInput, Prisma.UserUncheckedCreateWithoutWalletDepositsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWalletDepositsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutWalletDepositsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWalletDepositsInput, Prisma.UserUncheckedCreateWithoutWalletDepositsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWalletDepositsInput
+  upsert?: Prisma.UserUpsertWithoutWalletDepositsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWalletDepositsInput, Prisma.UserUpdateWithoutWalletDepositsInput>, Prisma.UserUncheckedUpdateWithoutWalletDepositsInput>
+}
+
 export type UserCreateWithoutAuthSessionsInput = {
   id?: string
   googleId?: string | null
@@ -686,10 +743,12 @@ export type UserCreateWithoutAuthSessionsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
   transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuthSessionsInput = {
@@ -706,10 +765,12 @@ export type UserUncheckedCreateWithoutAuthSessionsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
   transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuthSessionsInput = {
@@ -742,10 +803,12 @@ export type UserUpdateWithoutAuthSessionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
   transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthSessionsInput = {
@@ -762,10 +825,12 @@ export type UserUncheckedUpdateWithoutAuthSessionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
   transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProviderInput = {
@@ -782,10 +847,12 @@ export type UserCreateWithoutProviderInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
   transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProviderInput = {
@@ -802,10 +869,12 @@ export type UserUncheckedCreateWithoutProviderInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
   transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProviderInput = {
@@ -838,10 +907,12 @@ export type UserUpdateWithoutProviderInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
   transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderInput = {
@@ -858,10 +929,12 @@ export type UserUncheckedUpdateWithoutProviderInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
   transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConsumerInput = {
@@ -878,10 +951,12 @@ export type UserCreateWithoutConsumerInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
   transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConsumerInput = {
@@ -898,10 +973,12 @@ export type UserUncheckedCreateWithoutConsumerInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
   transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConsumerInput = {
@@ -934,10 +1011,12 @@ export type UserUpdateWithoutConsumerInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
   transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConsumerInput = {
@@ -954,10 +1033,12 @@ export type UserUncheckedUpdateWithoutConsumerInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
   transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRelayEventsInitiatedInput = {
@@ -974,10 +1055,12 @@ export type UserCreateWithoutRelayEventsInitiatedInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRelayEventsInitiatedInput = {
@@ -994,10 +1077,12 @@ export type UserUncheckedCreateWithoutRelayEventsInitiatedInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
+  walletDeposits?: Prisma.WalletDepositUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRelayEventsInitiatedInput = {
@@ -1030,10 +1115,12 @@ export type UserUpdateWithoutRelayEventsInitiatedInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRelayEventsInitiatedInput = {
@@ -1050,10 +1137,12 @@ export type UserUncheckedUpdateWithoutRelayEventsInitiatedInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTransactionsLoadedInput = {
@@ -1070,10 +1159,12 @@ export type UserCreateWithoutTransactionsLoadedInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
+  walletDeposits?: Prisma.WalletDepositCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTransactionsLoadedInput = {
@@ -1090,10 +1181,12 @@ export type UserUncheckedCreateWithoutTransactionsLoadedInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
+  walletDeposits?: Prisma.WalletDepositUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTransactionsLoadedInput = {
@@ -1126,10 +1219,12 @@ export type UserUpdateWithoutTransactionsLoadedInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTransactionsLoadedInput = {
@@ -1146,10 +1241,116 @@ export type UserUncheckedUpdateWithoutTransactionsLoadedInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
+  walletDeposits?: Prisma.WalletDepositUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutWalletDepositsInput = {
+  id?: string
+  googleId?: string | null
+  appleId?: string | null
+  xId?: string | null
+  name?: string | null
+  avatar?: string | null
+  email?: string | null
+  walletAddress: string
+  walletKeyIndex: number
+  role?: $Enums.Role | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
+  consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
+}
+
+export type UserUncheckedCreateWithoutWalletDepositsInput = {
+  id?: string
+  googleId?: string | null
+  appleId?: string | null
+  xId?: string | null
+  name?: string | null
+  avatar?: string | null
+  email?: string | null
+  walletAddress: string
+  walletKeyIndex: number
+  role?: $Enums.Role | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  usdcBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
+  consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
+}
+
+export type UserCreateOrConnectWithoutWalletDepositsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWalletDepositsInput, Prisma.UserUncheckedCreateWithoutWalletDepositsInput>
+}
+
+export type UserUpsertWithoutWalletDepositsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWalletDepositsInput, Prisma.UserUncheckedUpdateWithoutWalletDepositsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWalletDepositsInput, Prisma.UserUncheckedCreateWithoutWalletDepositsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutWalletDepositsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWalletDepositsInput, Prisma.UserUncheckedUpdateWithoutWalletDepositsInput>
+}
+
+export type UserUpdateWithoutWalletDepositsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  appleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  walletKeyIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
+  consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWalletDepositsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  appleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  walletKeyIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  usdcBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
+  consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
 }
 
 
@@ -1161,12 +1362,14 @@ export type UserCountOutputType = {
   authSessions: number
   relayEventsInitiated: number
   transactionsLoaded: number
+  walletDeposits: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authSessions?: boolean | UserCountOutputTypeCountAuthSessionsArgs
   relayEventsInitiated?: boolean | UserCountOutputTypeCountRelayEventsInitiatedArgs
   transactionsLoaded?: boolean | UserCountOutputTypeCountTransactionsLoadedArgs
+  walletDeposits?: boolean | UserCountOutputTypeCountWalletDepositsArgs
 }
 
 /**
@@ -1200,6 +1403,13 @@ export type UserCountOutputTypeCountTransactionsLoadedArgs<ExtArgs extends runti
   where?: Prisma.TransactionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWalletDepositsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalletDepositWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1215,11 +1425,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  usdcBalance?: boolean
   provider?: boolean | Prisma.User$providerArgs<ExtArgs>
   consumer?: boolean | Prisma.User$consumerArgs<ExtArgs>
   authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
   relayEventsInitiated?: boolean | Prisma.User$relayEventsInitiatedArgs<ExtArgs>
   transactionsLoaded?: boolean | Prisma.User$transactionsLoadedArgs<ExtArgs>
+  walletDeposits?: boolean | Prisma.User$walletDepositsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1237,6 +1449,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  usdcBalance?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1253,6 +1466,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  usdcBalance?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1269,15 +1483,17 @@ export type UserSelectScalar = {
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  usdcBalance?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "googleId" | "appleId" | "xId" | "name" | "avatar" | "email" | "walletAddress" | "walletKeyIndex" | "role" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "googleId" | "appleId" | "xId" | "name" | "avatar" | "email" | "walletAddress" | "walletKeyIndex" | "role" | "isActive" | "createdAt" | "updatedAt" | "usdcBalance", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   provider?: boolean | Prisma.User$providerArgs<ExtArgs>
   consumer?: boolean | Prisma.User$consumerArgs<ExtArgs>
   authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
   relayEventsInitiated?: boolean | Prisma.User$relayEventsInitiatedArgs<ExtArgs>
   transactionsLoaded?: boolean | Prisma.User$transactionsLoadedArgs<ExtArgs>
+  walletDeposits?: boolean | Prisma.User$walletDepositsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1291,6 +1507,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     authSessions: Prisma.$AuthSessionPayload<ExtArgs>[]
     relayEventsInitiated: Prisma.$RelayEventPayload<ExtArgs>[]
     transactionsLoaded: Prisma.$TransactionPayload<ExtArgs>[]
+    walletDeposits: Prisma.$WalletDepositPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1306,6 +1523,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isActive: boolean
     createdAt: Date
     updatedAt: Date
+    usdcBalance: runtime.Decimal
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1705,6 +1923,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   authSessions<T extends Prisma.User$authSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relayEventsInitiated<T extends Prisma.User$relayEventsInitiatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$relayEventsInitiatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RelayEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   transactionsLoaded<T extends Prisma.User$transactionsLoadedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$transactionsLoadedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  walletDeposits<T extends Prisma.User$walletDepositsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$walletDepositsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalletDepositPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1747,6 +1966,7 @@ export interface UserFieldRefs {
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly usdcBalance: Prisma.FieldRef<"User", 'Decimal'>
 }
     
 
@@ -2247,6 +2467,30 @@ export type User$transactionsLoadedArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
+}
+
+/**
+ * User.walletDeposits
+ */
+export type User$walletDepositsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalletDeposit
+   */
+  select?: Prisma.WalletDepositSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WalletDeposit
+   */
+  omit?: Prisma.WalletDepositOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalletDepositInclude<ExtArgs> | null
+  where?: Prisma.WalletDepositWhereInput
+  orderBy?: Prisma.WalletDepositOrderByWithRelationInput | Prisma.WalletDepositOrderByWithRelationInput[]
+  cursor?: Prisma.WalletDepositWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalletDepositScalarFieldEnum | Prisma.WalletDepositScalarFieldEnum[]
 }
 
 /**

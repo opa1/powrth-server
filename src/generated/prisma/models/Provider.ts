@@ -258,6 +258,7 @@ export type ProviderWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Provider"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   meters?: Prisma.MeterListRelationFilter
+  withdrawals?: Prisma.WithdrawalListRelationFilter
 }
 
 export type ProviderOrderByWithRelationInput = {
@@ -272,6 +273,7 @@ export type ProviderOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   meters?: Prisma.MeterOrderByRelationAggregateInput
+  withdrawals?: Prisma.WithdrawalOrderByRelationAggregateInput
 }
 
 export type ProviderWhereUniqueInput = Prisma.AtLeast<{
@@ -289,6 +291,7 @@ export type ProviderWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Provider"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   meters?: Prisma.MeterListRelationFilter
+  withdrawals?: Prisma.WithdrawalListRelationFilter
 }, "id" | "userId">
 
 export type ProviderOrderByWithAggregationInput = {
@@ -334,6 +337,7 @@ export type ProviderCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProviderInput
   meters?: Prisma.MeterCreateNestedManyWithoutProviderInput
+  withdrawals?: Prisma.WithdrawalCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderUncheckedCreateInput = {
@@ -347,6 +351,7 @@ export type ProviderUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutProviderInput
+  withdrawals?: Prisma.WithdrawalUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderUpdateInput = {
@@ -360,6 +365,7 @@ export type ProviderUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
   meters?: Prisma.MeterUpdateManyWithoutProviderNestedInput
+  withdrawals?: Prisma.WithdrawalUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderUncheckedUpdateInput = {
@@ -373,6 +379,7 @@ export type ProviderUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meters?: Prisma.MeterUncheckedUpdateManyWithoutProviderNestedInput
+  withdrawals?: Prisma.WithdrawalUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderCreateManyInput = {
@@ -463,6 +470,11 @@ export type ProviderSumOrderByAggregateInput = {
   totalWithdrawn?: Prisma.SortOrder
 }
 
+export type ProviderScalarRelationFilter = {
+  is?: Prisma.ProviderWhereInput
+  isNot?: Prisma.ProviderWhereInput
+}
+
 export type ProviderCreateNestedOneWithoutUserInput = {
   create?: Prisma.XOR<Prisma.ProviderCreateWithoutUserInput, Prisma.ProviderUncheckedCreateWithoutUserInput>
   connectOrCreate?: Prisma.ProviderCreateOrConnectWithoutUserInput
@@ -495,14 +507,6 @@ export type ProviderUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderUpdateToOneWithWhereWithoutUserInput, Prisma.ProviderUpdateWithoutUserInput>, Prisma.ProviderUncheckedUpdateWithoutUserInput>
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type ProviderCreateNestedOneWithoutMetersInput = {
   create?: Prisma.XOR<Prisma.ProviderCreateWithoutMetersInput, Prisma.ProviderUncheckedCreateWithoutMetersInput>
   connectOrCreate?: Prisma.ProviderCreateOrConnectWithoutMetersInput
@@ -519,6 +523,20 @@ export type ProviderUpdateOneWithoutMetersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderUpdateToOneWithWhereWithoutMetersInput, Prisma.ProviderUpdateWithoutMetersInput>, Prisma.ProviderUncheckedUpdateWithoutMetersInput>
 }
 
+export type ProviderCreateNestedOneWithoutWithdrawalsInput = {
+  create?: Prisma.XOR<Prisma.ProviderCreateWithoutWithdrawalsInput, Prisma.ProviderUncheckedCreateWithoutWithdrawalsInput>
+  connectOrCreate?: Prisma.ProviderCreateOrConnectWithoutWithdrawalsInput
+  connect?: Prisma.ProviderWhereUniqueInput
+}
+
+export type ProviderUpdateOneRequiredWithoutWithdrawalsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderCreateWithoutWithdrawalsInput, Prisma.ProviderUncheckedCreateWithoutWithdrawalsInput>
+  connectOrCreate?: Prisma.ProviderCreateOrConnectWithoutWithdrawalsInput
+  upsert?: Prisma.ProviderUpsertWithoutWithdrawalsInput
+  connect?: Prisma.ProviderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderUpdateToOneWithWhereWithoutWithdrawalsInput, Prisma.ProviderUpdateWithoutWithdrawalsInput>, Prisma.ProviderUncheckedUpdateWithoutWithdrawalsInput>
+}
+
 export type ProviderCreateWithoutUserInput = {
   id?: string
   businessName?: string | null
@@ -529,6 +547,7 @@ export type ProviderCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   meters?: Prisma.MeterCreateNestedManyWithoutProviderInput
+  withdrawals?: Prisma.WithdrawalCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderUncheckedCreateWithoutUserInput = {
@@ -541,6 +560,7 @@ export type ProviderUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutProviderInput
+  withdrawals?: Prisma.WithdrawalUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderCreateOrConnectWithoutUserInput = {
@@ -569,6 +589,7 @@ export type ProviderUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meters?: Prisma.MeterUpdateManyWithoutProviderNestedInput
+  withdrawals?: Prisma.WithdrawalUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderUncheckedUpdateWithoutUserInput = {
@@ -581,6 +602,7 @@ export type ProviderUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meters?: Prisma.MeterUncheckedUpdateManyWithoutProviderNestedInput
+  withdrawals?: Prisma.WithdrawalUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderCreateWithoutMetersInput = {
@@ -593,6 +615,7 @@ export type ProviderCreateWithoutMetersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProviderInput
+  withdrawals?: Prisma.WithdrawalCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderUncheckedCreateWithoutMetersInput = {
@@ -605,6 +628,7 @@ export type ProviderUncheckedCreateWithoutMetersInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  withdrawals?: Prisma.WithdrawalUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderCreateOrConnectWithoutMetersInput = {
@@ -633,6 +657,7 @@ export type ProviderUpdateWithoutMetersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
+  withdrawals?: Prisma.WithdrawalUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderUncheckedUpdateWithoutMetersInput = {
@@ -645,6 +670,75 @@ export type ProviderUncheckedUpdateWithoutMetersInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  withdrawals?: Prisma.WithdrawalUncheckedUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderCreateWithoutWithdrawalsInput = {
+  id?: string
+  businessName?: string | null
+  pricePerKwh?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalEarned?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalWithdrawn?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProviderInput
+  meters?: Prisma.MeterCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderUncheckedCreateWithoutWithdrawalsInput = {
+  id?: string
+  userId: string
+  businessName?: string | null
+  pricePerKwh?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalEarned?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalWithdrawn?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  meters?: Prisma.MeterUncheckedCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderCreateOrConnectWithoutWithdrawalsInput = {
+  where: Prisma.ProviderWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderCreateWithoutWithdrawalsInput, Prisma.ProviderUncheckedCreateWithoutWithdrawalsInput>
+}
+
+export type ProviderUpsertWithoutWithdrawalsInput = {
+  update: Prisma.XOR<Prisma.ProviderUpdateWithoutWithdrawalsInput, Prisma.ProviderUncheckedUpdateWithoutWithdrawalsInput>
+  create: Prisma.XOR<Prisma.ProviderCreateWithoutWithdrawalsInput, Prisma.ProviderUncheckedCreateWithoutWithdrawalsInput>
+  where?: Prisma.ProviderWhereInput
+}
+
+export type ProviderUpdateToOneWithWhereWithoutWithdrawalsInput = {
+  where?: Prisma.ProviderWhereInput
+  data: Prisma.XOR<Prisma.ProviderUpdateWithoutWithdrawalsInput, Prisma.ProviderUncheckedUpdateWithoutWithdrawalsInput>
+}
+
+export type ProviderUpdateWithoutWithdrawalsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePerKwh?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalEarned?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalWithdrawn?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
+  meters?: Prisma.MeterUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderUncheckedUpdateWithoutWithdrawalsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePerKwh?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalEarned?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalWithdrawn?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meters?: Prisma.MeterUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 
@@ -654,10 +748,12 @@ export type ProviderUncheckedUpdateWithoutMetersInput = {
 
 export type ProviderCountOutputType = {
   meters: number
+  withdrawals: number
 }
 
 export type ProviderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meters?: boolean | ProviderCountOutputTypeCountMetersArgs
+  withdrawals?: boolean | ProviderCountOutputTypeCountWithdrawalsArgs
 }
 
 /**
@@ -677,6 +773,13 @@ export type ProviderCountOutputTypeCountMetersArgs<ExtArgs extends runtime.Types
   where?: Prisma.MeterWhereInput
 }
 
+/**
+ * ProviderCountOutputType without action
+ */
+export type ProviderCountOutputTypeCountWithdrawalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WithdrawalWhereInput
+}
+
 
 export type ProviderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -690,6 +793,7 @@ export type ProviderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   meters?: boolean | Prisma.Provider$metersArgs<ExtArgs>
+  withdrawals?: boolean | Prisma.Provider$withdrawalsArgs<ExtArgs>
   _count?: boolean | Prisma.ProviderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["provider"]>
 
@@ -735,6 +839,7 @@ export type ProviderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type ProviderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   meters?: boolean | Prisma.Provider$metersArgs<ExtArgs>
+  withdrawals?: boolean | Prisma.Provider$withdrawalsArgs<ExtArgs>
   _count?: boolean | Prisma.ProviderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProviderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -749,6 +854,7 @@ export type $ProviderPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     meters: Prisma.$MeterPayload<ExtArgs>[]
+    withdrawals: Prisma.$WithdrawalPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1156,6 +1262,7 @@ export interface Prisma__ProviderClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   meters<T extends Prisma.Provider$metersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Provider$metersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  withdrawals<T extends Prisma.Provider$withdrawalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Provider$withdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WithdrawalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1616,6 +1723,30 @@ export type Provider$metersArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.MeterScalarFieldEnum | Prisma.MeterScalarFieldEnum[]
+}
+
+/**
+ * Provider.withdrawals
+ */
+export type Provider$withdrawalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Withdrawal
+   */
+  select?: Prisma.WithdrawalSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Withdrawal
+   */
+  omit?: Prisma.WithdrawalOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WithdrawalInclude<ExtArgs> | null
+  where?: Prisma.WithdrawalWhereInput
+  orderBy?: Prisma.WithdrawalOrderByWithRelationInput | Prisma.WithdrawalOrderByWithRelationInput[]
+  cursor?: Prisma.WithdrawalWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WithdrawalScalarFieldEnum | Prisma.WithdrawalScalarFieldEnum[]
 }
 
 /**

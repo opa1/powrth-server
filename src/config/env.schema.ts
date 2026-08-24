@@ -17,6 +17,7 @@ export const envSchema = z.object({
   SOLANA_RPC_URL: z.string().min(1),
   PLATFORM_FEE_RATE: z.coerce.number().default(0.02),
   TCP_PORT: z.coerce.number().int().default(8765),
+  USDC_MINT_ADDRESS: z.string().min(1),
 })
 
 export type EnvConfig = z.infer<typeof envSchema>

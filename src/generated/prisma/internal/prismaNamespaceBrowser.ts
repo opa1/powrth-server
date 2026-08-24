@@ -61,7 +61,9 @@ export const ModelName = {
   MeterEvent: 'MeterEvent',
   EnergyBalance: 'EnergyBalance',
   Transaction: 'Transaction',
-  PlatformConfig: 'PlatformConfig'
+  PlatformConfig: 'PlatformConfig',
+  WalletDeposit: 'WalletDeposit',
+  Withdrawal: 'Withdrawal'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -93,7 +95,8 @@ export const UserScalarFieldEnum = {
   role: 'role',
   isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  usdcBalance: 'usdcBalance'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -246,6 +249,35 @@ export const PlatformConfigScalarFieldEnum = {
 } as const
 
 export type PlatformConfigScalarFieldEnum = (typeof PlatformConfigScalarFieldEnum)[keyof typeof PlatformConfigScalarFieldEnum]
+
+
+export const WalletDepositScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  walletAddress: 'walletAddress',
+  usdcAmount: 'usdcAmount',
+  solanaSignature: 'solanaSignature',
+  status: 'status',
+  confirmedAt: 'confirmedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WalletDepositScalarFieldEnum = (typeof WalletDepositScalarFieldEnum)[keyof typeof WalletDepositScalarFieldEnum]
+
+
+export const WithdrawalScalarFieldEnum = {
+  id: 'id',
+  providerId: 'providerId',
+  usdcAmount: 'usdcAmount',
+  toWalletAddress: 'toWalletAddress',
+  solanaSignature: 'solanaSignature',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WithdrawalScalarFieldEnum = (typeof WithdrawalScalarFieldEnum)[keyof typeof WithdrawalScalarFieldEnum]
 
 
 export const SortOrder = {

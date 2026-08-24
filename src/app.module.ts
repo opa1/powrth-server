@@ -9,6 +9,7 @@ import { MetersModule } from './meters/meters.module'
 import { ProvidersModule } from './providers/providers.module'
 import { UsersModule } from './users/users.module'
 import { WalletModule } from './wallet/wallet.module'
+import { WebhooksModule } from './webhooks/webhooks.module'
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { WalletModule } from './wallet/wallet.module'
     ConsumersModule,
     MetersModule,
     BillingModule,
+    WebhooksModule,
     HealthModule,
   ],
 })

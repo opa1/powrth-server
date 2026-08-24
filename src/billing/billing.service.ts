@@ -55,7 +55,7 @@ export class BillingService {
   async loadCredit(input: LoadCreditInput): Promise<TransactionWithRelations> {
     const meter = await this.db.meter.findUnique({
       where: { id: input.meterId },
-      include: { provider: true },
+      include: { provider: { include: { user: true } }, consumer: true },
     })
 
     if (!meter) {
@@ -72,6 +72,17 @@ export class BillingService {
     const config = await this.platformConfigService.getConfig()
     if (input.usdcAmount < config.minCreditLoadUsdc.toNumber()) {
       throw new BadRequestException('Below minimum credit load amount')
+    }
+
+    const caller = await this.db.user.findUnique({
+      where: { id: input.callerUserId },
+      select: { usdcBalance: true },
+    })
+
+    if (!caller || caller.usdcBalance.toNumber() < input.usdcAmount) {
+      throw new BadRequestException(
+        'Insufficient platform USDC balance. Deposit USDC to your wallet first.',
+      )
     }
 
     const provider = meter.provider
@@ -125,6 +136,14 @@ export class BillingService {
       this.db.provider.update({
         where: { id: provider.id },
         data: { totalEarned: { increment: providerEarning } },
+      }),
+      this.db.user.update({
+        where: { id: input.callerUserId },
+        data: { usdcBalance: { decrement: input.usdcAmount } },
+      }),
+      this.db.user.update({
+        where: { id: provider.user.id },
+        data: { usdcBalance: { increment: providerEarning } },
       }),
     ])
 

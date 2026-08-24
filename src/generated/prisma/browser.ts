@@ -72,3 +72,13 @@ export type Transaction = Prisma.TransactionModel
  * 
  */
 export type PlatformConfig = Prisma.PlatformConfigModel
+/**
+ * Model WalletDeposit
+ * 
+ */
+export type WalletDeposit = Prisma.WalletDepositModel
+/**
+ * Model Withdrawal
+ * 
+ */
+export type Withdrawal = Prisma.WithdrawalModel
