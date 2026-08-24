@@ -70,20 +70,22 @@ export class TcpServer implements OnModuleInit, OnModuleDestroy {
           case 'login':
             this.socketsByMeterAddr.set(result.data.meterAddr, socket)
             this.meterAddrByConnId.set(connId, result.data.meterAddr)
-            void this.metersService.handleLogin(result.data, socket)
+            this.runHandler(connId, () => this.metersService.handleLogin(result.data, socket))
             break
           case 'energy':
-            void this.metersService.handleEnergyReport(result.data)
+            this.runHandler(connId, () => this.metersService.handleEnergyReport(result.data))
             break
           case 'relay_ack': {
             const meterAddr = this.meterAddrByConnId.get(connId)
             if (meterAddr) {
-              void this.metersService.handleRelayAck(meterAddr, result.success)
+              this.runHandler(connId, () =>
+                this.metersService.handleRelayAck(meterAddr, result.success),
+              )
             }
             break
           }
           case 'heartbeat':
-            void this.metersService.handleHeartbeat(result.meterAddr)
+            this.runHandler(connId, () => this.metersService.handleHeartbeat(result.meterAddr))
             break
           case 'unknown':
             this.logger.warn(`Skipped ${result.consumed} unknown byte(s) from ${connId}`)
@@ -100,7 +102,7 @@ export class TcpServer implements OnModuleInit, OnModuleDestroy {
       if (meterAddr) {
         this.socketsByMeterAddr.delete(meterAddr)
         this.meterAddrByConnId.delete(connId)
-        void this.metersService.handleDisconnect(meterAddr)
+        this.runHandler(connId, () => this.metersService.handleDisconnect(meterAddr))
       }
 
       this.buffersByConnId.delete(connId)
@@ -108,6 +110,12 @@ export class TcpServer implements OnModuleInit, OnModuleDestroy {
 
     socket.on('error', (err) => {
       this.logger.error(`Socket error on ${connId}: ${err.message}`)
+    })
+  }
+
+  private runHandler(connId: string, handler: () => Promise<void>): void {
+    handler().catch((err: Error) => {
+      this.logger.error(`Handler error on ${connId}: ${err.message}`)
     })
   }
 }

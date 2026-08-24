@@ -58,7 +58,10 @@ export const ModelName = {
   Meter: 'Meter',
   MeterReading: 'MeterReading',
   RelayEvent: 'RelayEvent',
-  MeterEvent: 'MeterEvent'
+  MeterEvent: 'MeterEvent',
+  EnergyBalance: 'EnergyBalance',
+  Transaction: 'Transaction',
+  PlatformConfig: 'PlatformConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -194,6 +197,55 @@ export const MeterEventScalarFieldEnum = {
 } as const
 
 export type MeterEventScalarFieldEnum = (typeof MeterEventScalarFieldEnum)[keyof typeof MeterEventScalarFieldEnum]
+
+
+export const EnergyBalanceScalarFieldEnum = {
+  id: 'id',
+  consumerId: 'consumerId',
+  meterId: 'meterId',
+  kwhBalance: 'kwhBalance',
+  usdcLoaded: 'usdcLoaded',
+  kwhConsumed: 'kwhConsumed',
+  lastTotalEnergyKwh: 'lastTotalEnergyKwh',
+  lastSyncedAt: 'lastSyncedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EnergyBalanceScalarFieldEnum = (typeof EnergyBalanceScalarFieldEnum)[keyof typeof EnergyBalanceScalarFieldEnum]
+
+
+export const TransactionScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  status: 'status',
+  loadedByUserId: 'loadedByUserId',
+  meterId: 'meterId',
+  usdcAmount: 'usdcAmount',
+  platformFee: 'platformFee',
+  platformFeeRate: 'platformFeeRate',
+  providerEarning: 'providerEarning',
+  kwhAmount: 'kwhAmount',
+  pricePerKwhUsed: 'pricePerKwhUsed',
+  solanaSignature: 'solanaSignature',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
+export const PlatformConfigScalarFieldEnum = {
+  id: 'id',
+  feeRatePercent: 'feeRatePercent',
+  minCreditLoadUsdc: 'minCreditLoadUsdc',
+  minWithdrawalUsdc: 'minWithdrawalUsdc',
+  feeWalletAddress: 'feeWalletAddress',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlatformConfigScalarFieldEnum = (typeof PlatformConfigScalarFieldEnum)[keyof typeof PlatformConfigScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -67,3 +67,20 @@ export const MeterEventType = {
 } as const
 
 export type MeterEventType = (typeof MeterEventType)[keyof typeof MeterEventType]
+
+
+export const TransactionType = {
+  CREDIT_LOAD: 'CREDIT_LOAD',
+  PROVIDER_WITHDRAWAL: 'PROVIDER_WITHDRAWAL'
+} as const
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
+
+export const TransactionStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  FAILED: 'FAILED'
+} as const
+
+export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]

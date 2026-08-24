@@ -79,3 +79,18 @@ export type RelayEvent = Prisma.RelayEventModel
  * 
  */
 export type MeterEvent = Prisma.MeterEventModel
+/**
+ * Model EnergyBalance
+ * 
+ */
+export type EnergyBalance = Prisma.EnergyBalanceModel
+/**
+ * Model Transaction
+ * 
+ */
+export type Transaction = Prisma.TransactionModel
+/**
+ * Model PlatformConfig
+ * 
+ */
+export type PlatformConfig = Prisma.PlatformConfigModel

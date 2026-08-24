@@ -176,6 +176,7 @@ export type ConsumerWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Consumer"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   meters?: Prisma.MeterListRelationFilter
+  energyBalances?: Prisma.EnergyBalanceListRelationFilter
 }
 
 export type ConsumerOrderByWithRelationInput = {
@@ -185,6 +186,7 @@ export type ConsumerOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   meters?: Prisma.MeterOrderByRelationAggregateInput
+  energyBalances?: Prisma.EnergyBalanceOrderByRelationAggregateInput
 }
 
 export type ConsumerWhereUniqueInput = Prisma.AtLeast<{
@@ -197,6 +199,7 @@ export type ConsumerWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Consumer"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   meters?: Prisma.MeterListRelationFilter
+  energyBalances?: Prisma.EnergyBalanceListRelationFilter
 }, "id" | "userId">
 
 export type ConsumerOrderByWithAggregationInput = {
@@ -225,6 +228,7 @@ export type ConsumerCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutConsumerInput
   meters?: Prisma.MeterCreateNestedManyWithoutConsumerInput
+  energyBalances?: Prisma.EnergyBalanceCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerUncheckedCreateInput = {
@@ -233,6 +237,7 @@ export type ConsumerUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutConsumerInput
+  energyBalances?: Prisma.EnergyBalanceUncheckedCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerUpdateInput = {
@@ -241,6 +246,7 @@ export type ConsumerUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutConsumerNestedInput
   meters?: Prisma.MeterUpdateManyWithoutConsumerNestedInput
+  energyBalances?: Prisma.EnergyBalanceUpdateManyWithoutConsumerNestedInput
 }
 
 export type ConsumerUncheckedUpdateInput = {
@@ -249,6 +255,7 @@ export type ConsumerUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meters?: Prisma.MeterUncheckedUpdateManyWithoutConsumerNestedInput
+  energyBalances?: Prisma.EnergyBalanceUncheckedUpdateManyWithoutConsumerNestedInput
 }
 
 export type ConsumerCreateManyInput = {
@@ -295,6 +302,11 @@ export type ConsumerMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type ConsumerScalarRelationFilter = {
+  is?: Prisma.ConsumerWhereInput
+  isNot?: Prisma.ConsumerWhereInput
 }
 
 export type ConsumerCreateNestedOneWithoutUserInput = {
@@ -345,11 +357,26 @@ export type ConsumerUpdateOneWithoutMetersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConsumerUpdateToOneWithWhereWithoutMetersInput, Prisma.ConsumerUpdateWithoutMetersInput>, Prisma.ConsumerUncheckedUpdateWithoutMetersInput>
 }
 
+export type ConsumerCreateNestedOneWithoutEnergyBalancesInput = {
+  create?: Prisma.XOR<Prisma.ConsumerCreateWithoutEnergyBalancesInput, Prisma.ConsumerUncheckedCreateWithoutEnergyBalancesInput>
+  connectOrCreate?: Prisma.ConsumerCreateOrConnectWithoutEnergyBalancesInput
+  connect?: Prisma.ConsumerWhereUniqueInput
+}
+
+export type ConsumerUpdateOneRequiredWithoutEnergyBalancesNestedInput = {
+  create?: Prisma.XOR<Prisma.ConsumerCreateWithoutEnergyBalancesInput, Prisma.ConsumerUncheckedCreateWithoutEnergyBalancesInput>
+  connectOrCreate?: Prisma.ConsumerCreateOrConnectWithoutEnergyBalancesInput
+  upsert?: Prisma.ConsumerUpsertWithoutEnergyBalancesInput
+  connect?: Prisma.ConsumerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ConsumerUpdateToOneWithWhereWithoutEnergyBalancesInput, Prisma.ConsumerUpdateWithoutEnergyBalancesInput>, Prisma.ConsumerUncheckedUpdateWithoutEnergyBalancesInput>
+}
+
 export type ConsumerCreateWithoutUserInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   meters?: Prisma.MeterCreateNestedManyWithoutConsumerInput
+  energyBalances?: Prisma.EnergyBalanceCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerUncheckedCreateWithoutUserInput = {
@@ -357,6 +384,7 @@ export type ConsumerUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   meters?: Prisma.MeterUncheckedCreateNestedManyWithoutConsumerInput
+  energyBalances?: Prisma.EnergyBalanceUncheckedCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerCreateOrConnectWithoutUserInput = {
@@ -380,6 +408,7 @@ export type ConsumerUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meters?: Prisma.MeterUpdateManyWithoutConsumerNestedInput
+  energyBalances?: Prisma.EnergyBalanceUpdateManyWithoutConsumerNestedInput
 }
 
 export type ConsumerUncheckedUpdateWithoutUserInput = {
@@ -387,6 +416,7 @@ export type ConsumerUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meters?: Prisma.MeterUncheckedUpdateManyWithoutConsumerNestedInput
+  energyBalances?: Prisma.EnergyBalanceUncheckedUpdateManyWithoutConsumerNestedInput
 }
 
 export type ConsumerCreateWithoutMetersInput = {
@@ -394,6 +424,7 @@ export type ConsumerCreateWithoutMetersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutConsumerInput
+  energyBalances?: Prisma.EnergyBalanceCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerUncheckedCreateWithoutMetersInput = {
@@ -401,6 +432,7 @@ export type ConsumerUncheckedCreateWithoutMetersInput = {
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  energyBalances?: Prisma.EnergyBalanceUncheckedCreateNestedManyWithoutConsumerInput
 }
 
 export type ConsumerCreateOrConnectWithoutMetersInput = {
@@ -424,6 +456,7 @@ export type ConsumerUpdateWithoutMetersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutConsumerNestedInput
+  energyBalances?: Prisma.EnergyBalanceUpdateManyWithoutConsumerNestedInput
 }
 
 export type ConsumerUncheckedUpdateWithoutMetersInput = {
@@ -431,6 +464,55 @@ export type ConsumerUncheckedUpdateWithoutMetersInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  energyBalances?: Prisma.EnergyBalanceUncheckedUpdateManyWithoutConsumerNestedInput
+}
+
+export type ConsumerCreateWithoutEnergyBalancesInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutConsumerInput
+  meters?: Prisma.MeterCreateNestedManyWithoutConsumerInput
+}
+
+export type ConsumerUncheckedCreateWithoutEnergyBalancesInput = {
+  id?: string
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  meters?: Prisma.MeterUncheckedCreateNestedManyWithoutConsumerInput
+}
+
+export type ConsumerCreateOrConnectWithoutEnergyBalancesInput = {
+  where: Prisma.ConsumerWhereUniqueInput
+  create: Prisma.XOR<Prisma.ConsumerCreateWithoutEnergyBalancesInput, Prisma.ConsumerUncheckedCreateWithoutEnergyBalancesInput>
+}
+
+export type ConsumerUpsertWithoutEnergyBalancesInput = {
+  update: Prisma.XOR<Prisma.ConsumerUpdateWithoutEnergyBalancesInput, Prisma.ConsumerUncheckedUpdateWithoutEnergyBalancesInput>
+  create: Prisma.XOR<Prisma.ConsumerCreateWithoutEnergyBalancesInput, Prisma.ConsumerUncheckedCreateWithoutEnergyBalancesInput>
+  where?: Prisma.ConsumerWhereInput
+}
+
+export type ConsumerUpdateToOneWithWhereWithoutEnergyBalancesInput = {
+  where?: Prisma.ConsumerWhereInput
+  data: Prisma.XOR<Prisma.ConsumerUpdateWithoutEnergyBalancesInput, Prisma.ConsumerUncheckedUpdateWithoutEnergyBalancesInput>
+}
+
+export type ConsumerUpdateWithoutEnergyBalancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutConsumerNestedInput
+  meters?: Prisma.MeterUpdateManyWithoutConsumerNestedInput
+}
+
+export type ConsumerUncheckedUpdateWithoutEnergyBalancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meters?: Prisma.MeterUncheckedUpdateManyWithoutConsumerNestedInput
 }
 
 
@@ -440,10 +522,12 @@ export type ConsumerUncheckedUpdateWithoutMetersInput = {
 
 export type ConsumerCountOutputType = {
   meters: number
+  energyBalances: number
 }
 
 export type ConsumerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meters?: boolean | ConsumerCountOutputTypeCountMetersArgs
+  energyBalances?: boolean | ConsumerCountOutputTypeCountEnergyBalancesArgs
 }
 
 /**
@@ -463,6 +547,13 @@ export type ConsumerCountOutputTypeCountMetersArgs<ExtArgs extends runtime.Types
   where?: Prisma.MeterWhereInput
 }
 
+/**
+ * ConsumerCountOutputType without action
+ */
+export type ConsumerCountOutputTypeCountEnergyBalancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EnergyBalanceWhereInput
+}
+
 
 export type ConsumerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -471,6 +562,7 @@ export type ConsumerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   meters?: boolean | Prisma.Consumer$metersArgs<ExtArgs>
+  energyBalances?: boolean | Prisma.Consumer$energyBalancesArgs<ExtArgs>
   _count?: boolean | Prisma.ConsumerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consumer"]>
 
@@ -501,6 +593,7 @@ export type ConsumerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type ConsumerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   meters?: boolean | Prisma.Consumer$metersArgs<ExtArgs>
+  energyBalances?: boolean | Prisma.Consumer$energyBalancesArgs<ExtArgs>
   _count?: boolean | Prisma.ConsumerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ConsumerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -515,6 +608,7 @@ export type $ConsumerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     meters: Prisma.$MeterPayload<ExtArgs>[]
+    energyBalances: Prisma.$EnergyBalancePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -917,6 +1011,7 @@ export interface Prisma__ConsumerClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   meters<T extends Prisma.Consumer$metersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consumer$metersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  energyBalances<T extends Prisma.Consumer$energyBalancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consumer$energyBalancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnergyBalancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1372,6 +1467,30 @@ export type Consumer$metersArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.MeterScalarFieldEnum | Prisma.MeterScalarFieldEnum[]
+}
+
+/**
+ * Consumer.energyBalances
+ */
+export type Consumer$energyBalancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EnergyBalance
+   */
+  select?: Prisma.EnergyBalanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EnergyBalance
+   */
+  omit?: Prisma.EnergyBalanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EnergyBalanceInclude<ExtArgs> | null
+  where?: Prisma.EnergyBalanceWhereInput
+  orderBy?: Prisma.EnergyBalanceOrderByWithRelationInput | Prisma.EnergyBalanceOrderByWithRelationInput[]
+  cursor?: Prisma.EnergyBalanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EnergyBalanceScalarFieldEnum | Prisma.EnergyBalanceScalarFieldEnum[]
 }
 
 /**

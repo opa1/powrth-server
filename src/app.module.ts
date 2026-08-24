@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
 import { AuthModule } from './auth/auth.module'
+import { BillingModule } from './billing/billing.module'
 import { ConfigModule } from './config/config.module'
 import { ConsumersModule } from './consumers/consumers.module'
 import { DatabaseModule } from './database/database.module'
@@ -19,6 +20,7 @@ import { WalletModule } from './wallet/wallet.module'
     ProvidersModule,
     ConsumersModule,
     MetersModule,
+    BillingModule,
     HealthModule,
   ],
 })

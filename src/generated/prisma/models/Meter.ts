@@ -301,6 +301,8 @@ export type MeterWhereInput = {
   readings?: Prisma.MeterReadingListRelationFilter
   relayEvents?: Prisma.RelayEventListRelationFilter
   meterEvents?: Prisma.MeterEventListRelationFilter
+  energyBalance?: Prisma.XOR<Prisma.EnergyBalanceNullableScalarRelationFilter, Prisma.EnergyBalanceWhereInput> | null
+  transactions?: Prisma.TransactionListRelationFilter
 }
 
 export type MeterOrderByWithRelationInput = {
@@ -324,6 +326,8 @@ export type MeterOrderByWithRelationInput = {
   readings?: Prisma.MeterReadingOrderByRelationAggregateInput
   relayEvents?: Prisma.RelayEventOrderByRelationAggregateInput
   meterEvents?: Prisma.MeterEventOrderByRelationAggregateInput
+  energyBalance?: Prisma.EnergyBalanceOrderByWithRelationInput
+  transactions?: Prisma.TransactionOrderByRelationAggregateInput
 }
 
 export type MeterWhereUniqueInput = Prisma.AtLeast<{
@@ -350,6 +354,8 @@ export type MeterWhereUniqueInput = Prisma.AtLeast<{
   readings?: Prisma.MeterReadingListRelationFilter
   relayEvents?: Prisma.RelayEventListRelationFilter
   meterEvents?: Prisma.MeterEventListRelationFilter
+  energyBalance?: Prisma.XOR<Prisma.EnergyBalanceNullableScalarRelationFilter, Prisma.EnergyBalanceWhereInput> | null
+  transactions?: Prisma.TransactionListRelationFilter
 }, "id" | "meterAddr" | "serial" | "imei">
 
 export type MeterOrderByWithAggregationInput = {
@@ -415,6 +421,8 @@ export type MeterCreateInput = {
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
   relayEvents?: Prisma.RelayEventCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateInput = {
@@ -436,6 +444,8 @@ export type MeterUncheckedCreateInput = {
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
   relayEvents?: Prisma.RelayEventUncheckedCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventUncheckedCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUpdateInput = {
@@ -457,6 +467,8 @@ export type MeterUpdateInput = {
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
   relayEvents?: Prisma.RelayEventUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateInput = {
@@ -478,6 +490,8 @@ export type MeterUncheckedUpdateInput = {
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
   relayEvents?: Prisma.RelayEventUncheckedUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUncheckedUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterCreateManyInput = {
@@ -607,6 +621,11 @@ export type MeterSumOrderByAggregateInput = {
 export type MeterScalarRelationFilter = {
   is?: Prisma.MeterWhereInput
   isNot?: Prisma.MeterWhereInput
+}
+
+export type MeterNullableScalarRelationFilter = {
+  is?: Prisma.MeterWhereInput | null
+  isNot?: Prisma.MeterWhereInput | null
 }
 
 export type MeterCreateNestedManyWithoutProviderInput = {
@@ -755,6 +774,36 @@ export type MeterUpdateOneRequiredWithoutMeterEventsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MeterUpdateToOneWithWhereWithoutMeterEventsInput, Prisma.MeterUpdateWithoutMeterEventsInput>, Prisma.MeterUncheckedUpdateWithoutMeterEventsInput>
 }
 
+export type MeterCreateNestedOneWithoutEnergyBalanceInput = {
+  create?: Prisma.XOR<Prisma.MeterCreateWithoutEnergyBalanceInput, Prisma.MeterUncheckedCreateWithoutEnergyBalanceInput>
+  connectOrCreate?: Prisma.MeterCreateOrConnectWithoutEnergyBalanceInput
+  connect?: Prisma.MeterWhereUniqueInput
+}
+
+export type MeterUpdateOneRequiredWithoutEnergyBalanceNestedInput = {
+  create?: Prisma.XOR<Prisma.MeterCreateWithoutEnergyBalanceInput, Prisma.MeterUncheckedCreateWithoutEnergyBalanceInput>
+  connectOrCreate?: Prisma.MeterCreateOrConnectWithoutEnergyBalanceInput
+  upsert?: Prisma.MeterUpsertWithoutEnergyBalanceInput
+  connect?: Prisma.MeterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MeterUpdateToOneWithWhereWithoutEnergyBalanceInput, Prisma.MeterUpdateWithoutEnergyBalanceInput>, Prisma.MeterUncheckedUpdateWithoutEnergyBalanceInput>
+}
+
+export type MeterCreateNestedOneWithoutTransactionsInput = {
+  create?: Prisma.XOR<Prisma.MeterCreateWithoutTransactionsInput, Prisma.MeterUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.MeterCreateOrConnectWithoutTransactionsInput
+  connect?: Prisma.MeterWhereUniqueInput
+}
+
+export type MeterUpdateOneWithoutTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MeterCreateWithoutTransactionsInput, Prisma.MeterUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.MeterCreateOrConnectWithoutTransactionsInput
+  upsert?: Prisma.MeterUpsertWithoutTransactionsInput
+  disconnect?: Prisma.MeterWhereInput | boolean
+  delete?: Prisma.MeterWhereInput | boolean
+  connect?: Prisma.MeterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MeterUpdateToOneWithWhereWithoutTransactionsInput, Prisma.MeterUpdateWithoutTransactionsInput>, Prisma.MeterUncheckedUpdateWithoutTransactionsInput>
+}
+
 export type MeterCreateWithoutProviderInput = {
   id?: string
   meterAddr: string
@@ -773,6 +822,8 @@ export type MeterCreateWithoutProviderInput = {
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
   relayEvents?: Prisma.RelayEventCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutProviderInput = {
@@ -793,6 +844,8 @@ export type MeterUncheckedCreateWithoutProviderInput = {
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
   relayEvents?: Prisma.RelayEventUncheckedCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventUncheckedCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutProviderInput = {
@@ -860,6 +913,8 @@ export type MeterCreateWithoutConsumerInput = {
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
   relayEvents?: Prisma.RelayEventCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutConsumerInput = {
@@ -880,6 +935,8 @@ export type MeterUncheckedCreateWithoutConsumerInput = {
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
   relayEvents?: Prisma.RelayEventUncheckedCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventUncheckedCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutConsumerInput = {
@@ -926,6 +983,8 @@ export type MeterCreateWithoutReadingsInput = {
   consumer?: Prisma.ConsumerCreateNestedOneWithoutMetersInput
   relayEvents?: Prisma.RelayEventCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutReadingsInput = {
@@ -946,6 +1005,8 @@ export type MeterUncheckedCreateWithoutReadingsInput = {
   updatedAt?: Date | string
   relayEvents?: Prisma.RelayEventUncheckedCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventUncheckedCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutReadingsInput = {
@@ -982,6 +1043,8 @@ export type MeterUpdateWithoutReadingsInput = {
   consumer?: Prisma.ConsumerUpdateOneWithoutMetersNestedInput
   relayEvents?: Prisma.RelayEventUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutReadingsInput = {
@@ -1002,6 +1065,8 @@ export type MeterUncheckedUpdateWithoutReadingsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relayEvents?: Prisma.RelayEventUncheckedUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUncheckedUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterCreateWithoutRelayEventsInput = {
@@ -1022,6 +1087,8 @@ export type MeterCreateWithoutRelayEventsInput = {
   consumer?: Prisma.ConsumerCreateNestedOneWithoutMetersInput
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutRelayEventsInput = {
@@ -1042,6 +1109,8 @@ export type MeterUncheckedCreateWithoutRelayEventsInput = {
   updatedAt?: Date | string
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
   meterEvents?: Prisma.MeterEventUncheckedCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutRelayEventsInput = {
@@ -1078,6 +1147,8 @@ export type MeterUpdateWithoutRelayEventsInput = {
   consumer?: Prisma.ConsumerUpdateOneWithoutMetersNestedInput
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutRelayEventsInput = {
@@ -1098,6 +1169,8 @@ export type MeterUncheckedUpdateWithoutRelayEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUncheckedUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterCreateWithoutMeterEventsInput = {
@@ -1118,6 +1191,8 @@ export type MeterCreateWithoutMeterEventsInput = {
   consumer?: Prisma.ConsumerCreateNestedOneWithoutMetersInput
   readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
   relayEvents?: Prisma.RelayEventCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutMeterInput
 }
 
 export type MeterUncheckedCreateWithoutMeterEventsInput = {
@@ -1138,6 +1213,8 @@ export type MeterUncheckedCreateWithoutMeterEventsInput = {
   updatedAt?: Date | string
   readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
   relayEvents?: Prisma.RelayEventUncheckedCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedCreateNestedOneWithoutMeterInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type MeterCreateOrConnectWithoutMeterEventsInput = {
@@ -1174,6 +1251,8 @@ export type MeterUpdateWithoutMeterEventsInput = {
   consumer?: Prisma.ConsumerUpdateOneWithoutMetersNestedInput
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
   relayEvents?: Prisma.RelayEventUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutMeterEventsInput = {
@@ -1194,6 +1273,216 @@ export type MeterUncheckedUpdateWithoutMeterEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
   relayEvents?: Prisma.RelayEventUncheckedUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMeterNestedInput
+}
+
+export type MeterCreateWithoutEnergyBalanceInput = {
+  id?: string
+  meterAddr: string
+  serial?: string | null
+  imei?: string | null
+  iccid?: string | null
+  softVer?: string | null
+  status?: $Enums.MeterStatus
+  relayState?: $Enums.RelayState
+  pricePerKwh?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  lastSeen?: Date | string | null
+  installedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  provider?: Prisma.ProviderCreateNestedOneWithoutMetersInput
+  consumer?: Prisma.ConsumerCreateNestedOneWithoutMetersInput
+  readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
+  relayEvents?: Prisma.RelayEventCreateNestedManyWithoutMeterInput
+  meterEvents?: Prisma.MeterEventCreateNestedManyWithoutMeterInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutMeterInput
+}
+
+export type MeterUncheckedCreateWithoutEnergyBalanceInput = {
+  id?: string
+  meterAddr: string
+  serial?: string | null
+  imei?: string | null
+  iccid?: string | null
+  softVer?: string | null
+  providerId?: string | null
+  consumerId?: string | null
+  status?: $Enums.MeterStatus
+  relayState?: $Enums.RelayState
+  pricePerKwh?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  lastSeen?: Date | string | null
+  installedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
+  relayEvents?: Prisma.RelayEventUncheckedCreateNestedManyWithoutMeterInput
+  meterEvents?: Prisma.MeterEventUncheckedCreateNestedManyWithoutMeterInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMeterInput
+}
+
+export type MeterCreateOrConnectWithoutEnergyBalanceInput = {
+  where: Prisma.MeterWhereUniqueInput
+  create: Prisma.XOR<Prisma.MeterCreateWithoutEnergyBalanceInput, Prisma.MeterUncheckedCreateWithoutEnergyBalanceInput>
+}
+
+export type MeterUpsertWithoutEnergyBalanceInput = {
+  update: Prisma.XOR<Prisma.MeterUpdateWithoutEnergyBalanceInput, Prisma.MeterUncheckedUpdateWithoutEnergyBalanceInput>
+  create: Prisma.XOR<Prisma.MeterCreateWithoutEnergyBalanceInput, Prisma.MeterUncheckedCreateWithoutEnergyBalanceInput>
+  where?: Prisma.MeterWhereInput
+}
+
+export type MeterUpdateToOneWithWhereWithoutEnergyBalanceInput = {
+  where?: Prisma.MeterWhereInput
+  data: Prisma.XOR<Prisma.MeterUpdateWithoutEnergyBalanceInput, Prisma.MeterUncheckedUpdateWithoutEnergyBalanceInput>
+}
+
+export type MeterUpdateWithoutEnergyBalanceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  meterAddr?: Prisma.StringFieldUpdateOperationsInput | string
+  serial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imei?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iccid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  softVer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMeterStatusFieldUpdateOperationsInput | $Enums.MeterStatus
+  relayState?: Prisma.EnumRelayStateFieldUpdateOperationsInput | $Enums.RelayState
+  pricePerKwh?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  installedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.ProviderUpdateOneWithoutMetersNestedInput
+  consumer?: Prisma.ConsumerUpdateOneWithoutMetersNestedInput
+  readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
+  relayEvents?: Prisma.RelayEventUpdateManyWithoutMeterNestedInput
+  meterEvents?: Prisma.MeterEventUpdateManyWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutMeterNestedInput
+}
+
+export type MeterUncheckedUpdateWithoutEnergyBalanceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  meterAddr?: Prisma.StringFieldUpdateOperationsInput | string
+  serial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imei?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iccid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  softVer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consumerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMeterStatusFieldUpdateOperationsInput | $Enums.MeterStatus
+  relayState?: Prisma.EnumRelayStateFieldUpdateOperationsInput | $Enums.RelayState
+  pricePerKwh?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  installedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
+  relayEvents?: Prisma.RelayEventUncheckedUpdateManyWithoutMeterNestedInput
+  meterEvents?: Prisma.MeterEventUncheckedUpdateManyWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMeterNestedInput
+}
+
+export type MeterCreateWithoutTransactionsInput = {
+  id?: string
+  meterAddr: string
+  serial?: string | null
+  imei?: string | null
+  iccid?: string | null
+  softVer?: string | null
+  status?: $Enums.MeterStatus
+  relayState?: $Enums.RelayState
+  pricePerKwh?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  lastSeen?: Date | string | null
+  installedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  provider?: Prisma.ProviderCreateNestedOneWithoutMetersInput
+  consumer?: Prisma.ConsumerCreateNestedOneWithoutMetersInput
+  readings?: Prisma.MeterReadingCreateNestedManyWithoutMeterInput
+  relayEvents?: Prisma.RelayEventCreateNestedManyWithoutMeterInput
+  meterEvents?: Prisma.MeterEventCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceCreateNestedOneWithoutMeterInput
+}
+
+export type MeterUncheckedCreateWithoutTransactionsInput = {
+  id?: string
+  meterAddr: string
+  serial?: string | null
+  imei?: string | null
+  iccid?: string | null
+  softVer?: string | null
+  providerId?: string | null
+  consumerId?: string | null
+  status?: $Enums.MeterStatus
+  relayState?: $Enums.RelayState
+  pricePerKwh?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  lastSeen?: Date | string | null
+  installedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  readings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutMeterInput
+  relayEvents?: Prisma.RelayEventUncheckedCreateNestedManyWithoutMeterInput
+  meterEvents?: Prisma.MeterEventUncheckedCreateNestedManyWithoutMeterInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedCreateNestedOneWithoutMeterInput
+}
+
+export type MeterCreateOrConnectWithoutTransactionsInput = {
+  where: Prisma.MeterWhereUniqueInput
+  create: Prisma.XOR<Prisma.MeterCreateWithoutTransactionsInput, Prisma.MeterUncheckedCreateWithoutTransactionsInput>
+}
+
+export type MeterUpsertWithoutTransactionsInput = {
+  update: Prisma.XOR<Prisma.MeterUpdateWithoutTransactionsInput, Prisma.MeterUncheckedUpdateWithoutTransactionsInput>
+  create: Prisma.XOR<Prisma.MeterCreateWithoutTransactionsInput, Prisma.MeterUncheckedCreateWithoutTransactionsInput>
+  where?: Prisma.MeterWhereInput
+}
+
+export type MeterUpdateToOneWithWhereWithoutTransactionsInput = {
+  where?: Prisma.MeterWhereInput
+  data: Prisma.XOR<Prisma.MeterUpdateWithoutTransactionsInput, Prisma.MeterUncheckedUpdateWithoutTransactionsInput>
+}
+
+export type MeterUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  meterAddr?: Prisma.StringFieldUpdateOperationsInput | string
+  serial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imei?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iccid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  softVer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMeterStatusFieldUpdateOperationsInput | $Enums.MeterStatus
+  relayState?: Prisma.EnumRelayStateFieldUpdateOperationsInput | $Enums.RelayState
+  pricePerKwh?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  installedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.ProviderUpdateOneWithoutMetersNestedInput
+  consumer?: Prisma.ConsumerUpdateOneWithoutMetersNestedInput
+  readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
+  relayEvents?: Prisma.RelayEventUpdateManyWithoutMeterNestedInput
+  meterEvents?: Prisma.MeterEventUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUpdateOneWithoutMeterNestedInput
+}
+
+export type MeterUncheckedUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  meterAddr?: Prisma.StringFieldUpdateOperationsInput | string
+  serial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imei?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iccid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  softVer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consumerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumMeterStatusFieldUpdateOperationsInput | $Enums.MeterStatus
+  relayState?: Prisma.EnumRelayStateFieldUpdateOperationsInput | $Enums.RelayState
+  pricePerKwh?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  installedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
+  relayEvents?: Prisma.RelayEventUncheckedUpdateManyWithoutMeterNestedInput
+  meterEvents?: Prisma.MeterEventUncheckedUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedUpdateOneWithoutMeterNestedInput
 }
 
 export type MeterCreateManyProviderInput = {
@@ -1231,6 +1520,8 @@ export type MeterUpdateWithoutProviderInput = {
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
   relayEvents?: Prisma.RelayEventUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutProviderInput = {
@@ -1251,6 +1542,8 @@ export type MeterUncheckedUpdateWithoutProviderInput = {
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
   relayEvents?: Prisma.RelayEventUncheckedUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUncheckedUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateManyWithoutProviderInput = {
@@ -1305,6 +1598,8 @@ export type MeterUpdateWithoutConsumerInput = {
   readings?: Prisma.MeterReadingUpdateManyWithoutMeterNestedInput
   relayEvents?: Prisma.RelayEventUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateWithoutConsumerInput = {
@@ -1325,6 +1620,8 @@ export type MeterUncheckedUpdateWithoutConsumerInput = {
   readings?: Prisma.MeterReadingUncheckedUpdateManyWithoutMeterNestedInput
   relayEvents?: Prisma.RelayEventUncheckedUpdateManyWithoutMeterNestedInput
   meterEvents?: Prisma.MeterEventUncheckedUpdateManyWithoutMeterNestedInput
+  energyBalance?: Prisma.EnergyBalanceUncheckedUpdateOneWithoutMeterNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type MeterUncheckedUpdateManyWithoutConsumerInput = {
@@ -1353,12 +1650,14 @@ export type MeterCountOutputType = {
   readings: number
   relayEvents: number
   meterEvents: number
+  transactions: number
 }
 
 export type MeterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   readings?: boolean | MeterCountOutputTypeCountReadingsArgs
   relayEvents?: boolean | MeterCountOutputTypeCountRelayEventsArgs
   meterEvents?: boolean | MeterCountOutputTypeCountMeterEventsArgs
+  transactions?: boolean | MeterCountOutputTypeCountTransactionsArgs
 }
 
 /**
@@ -1392,6 +1691,13 @@ export type MeterCountOutputTypeCountMeterEventsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.MeterEventWhereInput
 }
 
+/**
+ * MeterCountOutputType without action
+ */
+export type MeterCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransactionWhereInput
+}
+
 
 export type MeterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1414,6 +1720,8 @@ export type MeterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   readings?: boolean | Prisma.Meter$readingsArgs<ExtArgs>
   relayEvents?: boolean | Prisma.Meter$relayEventsArgs<ExtArgs>
   meterEvents?: boolean | Prisma.Meter$meterEventsArgs<ExtArgs>
+  energyBalance?: boolean | Prisma.Meter$energyBalanceArgs<ExtArgs>
+  transactions?: boolean | Prisma.Meter$transactionsArgs<ExtArgs>
   _count?: boolean | Prisma.MeterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["meter"]>
 
@@ -1482,6 +1790,8 @@ export type MeterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   readings?: boolean | Prisma.Meter$readingsArgs<ExtArgs>
   relayEvents?: boolean | Prisma.Meter$relayEventsArgs<ExtArgs>
   meterEvents?: boolean | Prisma.Meter$meterEventsArgs<ExtArgs>
+  energyBalance?: boolean | Prisma.Meter$energyBalanceArgs<ExtArgs>
+  transactions?: boolean | Prisma.Meter$transactionsArgs<ExtArgs>
   _count?: boolean | Prisma.MeterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MeterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1501,6 +1811,8 @@ export type $MeterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     readings: Prisma.$MeterReadingPayload<ExtArgs>[]
     relayEvents: Prisma.$RelayEventPayload<ExtArgs>[]
     meterEvents: Prisma.$MeterEventPayload<ExtArgs>[]
+    energyBalance: Prisma.$EnergyBalancePayload<ExtArgs> | null
+    transactions: Prisma.$TransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1917,6 +2229,8 @@ export interface Prisma__MeterClient<T, Null = never, ExtArgs extends runtime.Ty
   readings<T extends Prisma.Meter$readingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meter$readingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relayEvents<T extends Prisma.Meter$relayEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meter$relayEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RelayEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meterEvents<T extends Prisma.Meter$meterEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meter$meterEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  energyBalance<T extends Prisma.Meter$energyBalanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meter$energyBalanceArgs<ExtArgs>>): Prisma.Prisma__EnergyBalanceClient<runtime.Types.Result.GetResult<Prisma.$EnergyBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  transactions<T extends Prisma.Meter$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Meter$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2469,6 +2783,49 @@ export type Meter$meterEventsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.MeterEventScalarFieldEnum | Prisma.MeterEventScalarFieldEnum[]
+}
+
+/**
+ * Meter.energyBalance
+ */
+export type Meter$energyBalanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EnergyBalance
+   */
+  select?: Prisma.EnergyBalanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EnergyBalance
+   */
+  omit?: Prisma.EnergyBalanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EnergyBalanceInclude<ExtArgs> | null
+  where?: Prisma.EnergyBalanceWhereInput
+}
+
+/**
+ * Meter.transactions
+ */
+export type Meter$transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Transaction
+   */
+  select?: Prisma.TransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Transaction
+   */
+  omit?: Prisma.TransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null
+  where?: Prisma.TransactionWhereInput
+  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
 }
 
 /**

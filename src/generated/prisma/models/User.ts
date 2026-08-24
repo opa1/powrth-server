@@ -284,6 +284,7 @@ export type UserWhereInput = {
   consumer?: Prisma.XOR<Prisma.ConsumerNullableScalarRelationFilter, Prisma.ConsumerWhereInput> | null
   authSessions?: Prisma.AuthSessionListRelationFilter
   relayEventsInitiated?: Prisma.RelayEventListRelationFilter
+  transactionsLoaded?: Prisma.TransactionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -304,6 +305,7 @@ export type UserOrderByWithRelationInput = {
   consumer?: Prisma.ConsumerOrderByWithRelationInput
   authSessions?: Prisma.AuthSessionOrderByRelationAggregateInput
   relayEventsInitiated?: Prisma.RelayEventOrderByRelationAggregateInput
+  transactionsLoaded?: Prisma.TransactionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -327,6 +329,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   consumer?: Prisma.XOR<Prisma.ConsumerNullableScalarRelationFilter, Prisma.ConsumerWhereInput> | null
   authSessions?: Prisma.AuthSessionListRelationFilter
   relayEventsInitiated?: Prisma.RelayEventListRelationFilter
+  transactionsLoaded?: Prisma.TransactionListRelationFilter
 }, "id" | "googleId" | "appleId" | "xId" | "email" | "walletAddress" | "walletKeyIndex">
 
 export type UserOrderByWithAggregationInput = {
@@ -387,6 +390,7 @@ export type UserCreateInput = {
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -407,6 +411,7 @@ export type UserUncheckedCreateInput = {
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserUpdateInput = {
@@ -427,6 +432,7 @@ export type UserUpdateInput = {
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -447,6 +453,7 @@ export type UserUncheckedUpdateInput = {
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -649,6 +656,22 @@ export type UserUpdateOneWithoutRelayEventsInitiatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRelayEventsInitiatedInput, Prisma.UserUpdateWithoutRelayEventsInitiatedInput>, Prisma.UserUncheckedUpdateWithoutRelayEventsInitiatedInput>
 }
 
+export type UserCreateNestedOneWithoutTransactionsLoadedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTransactionsLoadedInput, Prisma.UserUncheckedCreateWithoutTransactionsLoadedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTransactionsLoadedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutTransactionsLoadedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTransactionsLoadedInput, Prisma.UserUncheckedCreateWithoutTransactionsLoadedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTransactionsLoadedInput
+  upsert?: Prisma.UserUpsertWithoutTransactionsLoadedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTransactionsLoadedInput, Prisma.UserUpdateWithoutTransactionsLoadedInput>, Prisma.UserUncheckedUpdateWithoutTransactionsLoadedInput>
+}
+
 export type UserCreateWithoutAuthSessionsInput = {
   id?: string
   googleId?: string | null
@@ -666,6 +689,7 @@ export type UserCreateWithoutAuthSessionsInput = {
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserUncheckedCreateWithoutAuthSessionsInput = {
@@ -685,6 +709,7 @@ export type UserUncheckedCreateWithoutAuthSessionsInput = {
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserCreateOrConnectWithoutAuthSessionsInput = {
@@ -720,6 +745,7 @@ export type UserUpdateWithoutAuthSessionsInput = {
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthSessionsInput = {
@@ -739,6 +765,7 @@ export type UserUncheckedUpdateWithoutAuthSessionsInput = {
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserCreateWithoutProviderInput = {
@@ -758,6 +785,7 @@ export type UserCreateWithoutProviderInput = {
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserUncheckedCreateWithoutProviderInput = {
@@ -777,6 +805,7 @@ export type UserUncheckedCreateWithoutProviderInput = {
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserCreateOrConnectWithoutProviderInput = {
@@ -812,6 +841,7 @@ export type UserUpdateWithoutProviderInput = {
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProviderInput = {
@@ -831,6 +861,7 @@ export type UserUncheckedUpdateWithoutProviderInput = {
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserCreateWithoutConsumerInput = {
@@ -850,6 +881,7 @@ export type UserCreateWithoutConsumerInput = {
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserUncheckedCreateWithoutConsumerInput = {
@@ -869,6 +901,7 @@ export type UserUncheckedCreateWithoutConsumerInput = {
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
+  transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserCreateOrConnectWithoutConsumerInput = {
@@ -904,6 +937,7 @@ export type UserUpdateWithoutConsumerInput = {
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConsumerInput = {
@@ -923,6 +957,7 @@ export type UserUncheckedUpdateWithoutConsumerInput = {
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
+  transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserCreateWithoutRelayEventsInitiatedInput = {
@@ -942,6 +977,7 @@ export type UserCreateWithoutRelayEventsInitiatedInput = {
   provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  transactionsLoaded?: Prisma.TransactionCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserUncheckedCreateWithoutRelayEventsInitiatedInput = {
@@ -961,6 +997,7 @@ export type UserUncheckedCreateWithoutRelayEventsInitiatedInput = {
   provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
   consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
   authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  transactionsLoaded?: Prisma.TransactionUncheckedCreateNestedManyWithoutLoadedByInput
 }
 
 export type UserCreateOrConnectWithoutRelayEventsInitiatedInput = {
@@ -996,6 +1033,7 @@ export type UserUpdateWithoutRelayEventsInitiatedInput = {
   provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  transactionsLoaded?: Prisma.TransactionUpdateManyWithoutLoadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRelayEventsInitiatedInput = {
@@ -1015,6 +1053,103 @@ export type UserUncheckedUpdateWithoutRelayEventsInitiatedInput = {
   provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
   consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
   authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  transactionsLoaded?: Prisma.TransactionUncheckedUpdateManyWithoutLoadedByNestedInput
+}
+
+export type UserCreateWithoutTransactionsLoadedInput = {
+  id?: string
+  googleId?: string | null
+  appleId?: string | null
+  xId?: string | null
+  name?: string | null
+  avatar?: string | null
+  email?: string | null
+  walletAddress: string
+  walletKeyIndex: number
+  role?: $Enums.Role | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  provider?: Prisma.ProviderCreateNestedOneWithoutUserInput
+  consumer?: Prisma.ConsumerCreateNestedOneWithoutUserInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventCreateNestedManyWithoutInitiatedByInput
+}
+
+export type UserUncheckedCreateWithoutTransactionsLoadedInput = {
+  id?: string
+  googleId?: string | null
+  appleId?: string | null
+  xId?: string | null
+  name?: string | null
+  avatar?: string | null
+  email?: string | null
+  walletAddress: string
+  walletKeyIndex: number
+  role?: $Enums.Role | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  provider?: Prisma.ProviderUncheckedCreateNestedOneWithoutUserInput
+  consumer?: Prisma.ConsumerUncheckedCreateNestedOneWithoutUserInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedCreateNestedManyWithoutInitiatedByInput
+}
+
+export type UserCreateOrConnectWithoutTransactionsLoadedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTransactionsLoadedInput, Prisma.UserUncheckedCreateWithoutTransactionsLoadedInput>
+}
+
+export type UserUpsertWithoutTransactionsLoadedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTransactionsLoadedInput, Prisma.UserUncheckedUpdateWithoutTransactionsLoadedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTransactionsLoadedInput, Prisma.UserUncheckedCreateWithoutTransactionsLoadedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTransactionsLoadedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTransactionsLoadedInput, Prisma.UserUncheckedUpdateWithoutTransactionsLoadedInput>
+}
+
+export type UserUpdateWithoutTransactionsLoadedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  appleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  walletKeyIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.ProviderUpdateOneWithoutUserNestedInput
+  consumer?: Prisma.ConsumerUpdateOneWithoutUserNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUpdateManyWithoutInitiatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTransactionsLoadedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  appleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  xId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  walletAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  walletKeyIndex?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.ProviderUncheckedUpdateOneWithoutUserNestedInput
+  consumer?: Prisma.ConsumerUncheckedUpdateOneWithoutUserNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  relayEventsInitiated?: Prisma.RelayEventUncheckedUpdateManyWithoutInitiatedByNestedInput
 }
 
 
@@ -1025,11 +1160,13 @@ export type UserUncheckedUpdateWithoutRelayEventsInitiatedInput = {
 export type UserCountOutputType = {
   authSessions: number
   relayEventsInitiated: number
+  transactionsLoaded: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authSessions?: boolean | UserCountOutputTypeCountAuthSessionsArgs
   relayEventsInitiated?: boolean | UserCountOutputTypeCountRelayEventsInitiatedArgs
+  transactionsLoaded?: boolean | UserCountOutputTypeCountTransactionsLoadedArgs
 }
 
 /**
@@ -1056,6 +1193,13 @@ export type UserCountOutputTypeCountRelayEventsInitiatedArgs<ExtArgs extends run
   where?: Prisma.RelayEventWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTransactionsLoadedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransactionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1075,6 +1219,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   consumer?: boolean | Prisma.User$consumerArgs<ExtArgs>
   authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
   relayEventsInitiated?: boolean | Prisma.User$relayEventsInitiatedArgs<ExtArgs>
+  transactionsLoaded?: boolean | Prisma.User$transactionsLoadedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1132,6 +1277,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   consumer?: boolean | Prisma.User$consumerArgs<ExtArgs>
   authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
   relayEventsInitiated?: boolean | Prisma.User$relayEventsInitiatedArgs<ExtArgs>
+  transactionsLoaded?: boolean | Prisma.User$transactionsLoadedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1144,6 +1290,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     consumer: Prisma.$ConsumerPayload<ExtArgs> | null
     authSessions: Prisma.$AuthSessionPayload<ExtArgs>[]
     relayEventsInitiated: Prisma.$RelayEventPayload<ExtArgs>[]
+    transactionsLoaded: Prisma.$TransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1557,6 +1704,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   consumer<T extends Prisma.User$consumerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$consumerArgs<ExtArgs>>): Prisma.Prisma__ConsumerClient<runtime.Types.Result.GetResult<Prisma.$ConsumerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   authSessions<T extends Prisma.User$authSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relayEventsInitiated<T extends Prisma.User$relayEventsInitiatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$relayEventsInitiatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RelayEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  transactionsLoaded<T extends Prisma.User$transactionsLoadedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$transactionsLoadedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2075,6 +2223,30 @@ export type User$relayEventsInitiatedArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.RelayEventScalarFieldEnum | Prisma.RelayEventScalarFieldEnum[]
+}
+
+/**
+ * User.transactionsLoaded
+ */
+export type User$transactionsLoadedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Transaction
+   */
+  select?: Prisma.TransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Transaction
+   */
+  omit?: Prisma.TransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null
+  where?: Prisma.TransactionWhereInput
+  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
 }
 
 /**

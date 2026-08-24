@@ -89,6 +89,7 @@ const MAX_EVENTS_TAKE = 100
 @Injectable()
 export class MetersService {
   private readonly logger = new Logger(MetersService.name)
+  private readonly LOW_BALANCE_THRESHOLD_KWH = 0.1
 
   constructor(
     private readonly db: DatabaseService,
@@ -179,6 +180,51 @@ export class MetersService {
         },
       },
     })
+
+    await this.syncEnergyBalance(meter.id, meter.meterAddr, reading)
+  }
+
+  private async syncEnergyBalance(
+    meterId: string,
+    meterAddr: string,
+    reading: EnergyReading,
+  ): Promise<void> {
+    const energyBalance = await this.db.energyBalance.findUnique({ where: { meterId } })
+
+    if (!energyBalance) {
+      return
+    }
+
+    const currentTotalEnergyKwh = reading.totalEnergyKwh
+    const consumption =
+      energyBalance.lastTotalEnergyKwh !== null
+        ? Math.max(0, currentTotalEnergyKwh - energyBalance.lastTotalEnergyKwh.toNumber())
+        : 0
+
+    await this.db.energyBalance.update({
+      where: { meterId },
+      data: {
+        kwhBalance: { decrement: consumption },
+        kwhConsumed: { increment: consumption },
+        lastSyncedAt: new Date(),
+        lastTotalEnergyKwh: currentTotalEnergyKwh,
+      },
+    })
+
+    const updatedBalance = energyBalance.kwhBalance.toNumber() - consumption
+
+    if (updatedBalance <= this.LOW_BALANCE_THRESHOLD_KWH && reading.relayState === 'ON') {
+      this.relayService
+        .sendCommand({
+          meterId,
+          meterAddr,
+          action: 'TRIP',
+          trigger: 'BALANCE_DEPLETED_SERVER',
+        })
+        .catch((err: Error) => {
+          this.logger.error(`[Balance] Backup trip failed: ${err.message}`)
+        })
+    }
   }
 
   async handleRelayAck(meterAddr: string, success: boolean): Promise<void> {
