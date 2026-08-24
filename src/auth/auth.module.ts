@@ -14,6 +14,7 @@ import { XStrategy } from './strategies/x.strategy'
     UsersModule,
     WalletModule,
     JwtModule.registerAsync({
+      global: true,
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('JWT_ACCESS_SECRET'),

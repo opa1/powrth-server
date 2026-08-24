@@ -18,6 +18,16 @@ interface UpsertByProviderResult {
   isNewUser: boolean
 }
 
+export interface UserProfile {
+  id: string
+  name: string | null
+  avatar: string | null
+  email: string | null
+  role: Role | null
+  walletAddress: string
+  createdAt: Date
+}
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -97,6 +107,22 @@ export class UsersService {
 
       return updated
     })
+  }
+
+  async updateProfile(userId: string, input: { name?: string; avatar?: string }): Promise<User> {
+    if (input.name === undefined && input.avatar === undefined) {
+      throw new BadRequestException('At least one field must be provided')
+    }
+
+    const data: { name?: string; avatar?: string } = {}
+    if (input.name !== undefined) {
+      data.name = input.name
+    }
+    if (input.avatar !== undefined) {
+      data.avatar = input.avatar
+    }
+
+    return this.db.user.update({ where: { id: userId }, data })
   }
 
   private async findByProvider(provider: SocialProvider, providerId: string): Promise<User | null> {
