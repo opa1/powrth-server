@@ -82,3 +82,8 @@ export type WalletDeposit = Prisma.WalletDepositModel
  * 
  */
 export type Withdrawal = Prisma.WithdrawalModel
+/**
+ * Model IdempotencyKey
+ * 
+ */
+export type IdempotencyKey = Prisma.IdempotencyKeyModel

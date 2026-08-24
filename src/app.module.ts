@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common'
+import { APP_GUARD } from '@nestjs/core'
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
 import { AdminModule } from './admin/admin.module'
 import { AuthModule } from './auth/auth.module'
 import { BillingModule } from './billing/billing.module'
+import { CommonModule } from './common/common.module'
 import { ConfigModule } from './config/config.module'
 import { ConsumersModule } from './consumers/consumers.module'
 import { DatabaseModule } from './database/database.module'
@@ -16,6 +19,17 @@ import { WebhooksModule } from './webhooks/webhooks.module'
   imports: [
     ConfigModule,
     DatabaseModule,
+    CommonModule,
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [],
+      useFactory: () => [
+        { name: 'default', ttl: 60_000, limit: 60 },
+        { name: 'auth', ttl: 60_000, limit: 5 },
+        { name: 'billing', ttl: 60_000, limit: 20 },
+        { name: 'wallet', ttl: 60_000, limit: 5 },
+      ],
+    }),
     AuthModule,
     UsersModule,
     WalletModule,
@@ -27,5 +41,6 @@ import { WebhooksModule } from './webhooks/webhooks.module'
     AdminModule,
     HealthModule,
   ],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}

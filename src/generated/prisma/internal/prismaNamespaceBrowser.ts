@@ -63,7 +63,8 @@ export const ModelName = {
   Transaction: 'Transaction',
   PlatformConfig: 'PlatformConfig',
   WalletDeposit: 'WalletDeposit',
-  Withdrawal: 'Withdrawal'
+  Withdrawal: 'Withdrawal',
+  IdempotencyKey: 'IdempotencyKey'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -278,6 +279,18 @@ export const WithdrawalScalarFieldEnum = {
 } as const
 
 export type WithdrawalScalarFieldEnum = (typeof WithdrawalScalarFieldEnum)[keyof typeof WithdrawalScalarFieldEnum]
+
+
+export const IdempotencyKeyScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  userId: 'userId',
+  response: 'response',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type IdempotencyKeyScalarFieldEnum = (typeof IdempotencyKeyScalarFieldEnum)[keyof typeof IdempotencyKeyScalarFieldEnum]
 
 
 export const SortOrder = {

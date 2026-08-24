@@ -293,3 +293,15 @@ model Withdrawal {
 
   @@index([providerId])
 }
+
+model IdempotencyKey {
+  id        String   @id @default(uuid())
+  key       String
+  userId    String
+  response  Json
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([key, userId])
+  @@index([expiresAt])
+}

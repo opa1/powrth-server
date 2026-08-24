@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
+import { SkipThrottle, Throttle } from '@nestjs/throttler'
 import { CurrentUser } from '../common/decorators/current-user.decorator'
 import { Roles } from '../common/decorators/roles.decorator'
 import { AuthGuard } from '../common/guards/auth.guard'
@@ -47,8 +48,13 @@ export class WalletController {
     }
   }
 
+  // NestJS's ThrottlerGuard checks every route against every configured
+  // named throttler (AND logic), not just the one named in @Throttle().
+  // Skip the unrelated buckets so this route is bound only by 'wallet'.
   @UseGuards(RolesGuard)
   @Roles('PROVIDER')
+  @Throttle({ wallet: { limit: 5, ttl: 60_000 } })
+  @SkipThrottle({ auth: true, billing: true })
   @Post('withdraw')
   async withdraw(
     @CurrentUser() user: User,

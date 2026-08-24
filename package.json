@@ -15,13 +15,17 @@
     "start:prod": "node dist/main.js",
     "lint": "eslint \"{src,prisma}/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
     "@nestjs/jwt": "^11.0.0",
     "@nestjs/platform-fastify": "^11.0.0",
+    "@nestjs/throttler": "^6.2.1",
     "@prisma/adapter-pg": "^7.0.0",
     "@prisma/client": "^7.0.0",
     "@solana/spl-token": "^0.4.9",
@@ -40,19 +44,39 @@
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",
+    "@nestjs/testing": "^11.0.0",
     "@types/bip39": "^3.0.0",
+    "@types/jest": "^29.5.0",
     "@types/jsonwebtoken": "^9.0.0",
     "@types/node": "^22.10.0",
     "@types/pg": "^8.11.0",
+    "@types/supertest": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.0",
+    "jest": "^29.7.0",
     "pm2": "^5.4.0",
     "prettier": "^3.3.0",
     "prisma": "^7.0.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.0",
     "ts-node": "^10.9.0",
     "typescript": "^5.6.0"
+  },
+  "jest": {
+    "moduleFileExtensions": ["js", "json", "ts"],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": { "^.+\\.ts$": "ts-jest" },
+    "collectCoverageFrom": ["**/*.(t|j)s", "!**/*.spec.ts", "!**/index.ts"],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "@/(.*)": "<rootDir>/$1",
+      "^@solana/web3\\.js$": "<rootDir>/__mocks__/solana-web3.stub.ts",
+      "^@solana/spl-token$": "<rootDir>/__mocks__/solana-spl-token.stub.ts"
+    }
   }
 }

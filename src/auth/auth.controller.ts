@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Post, UseGuards } from '@nestjs/common'
+import { SkipThrottle, Throttle } from '@nestjs/throttler'
 import { CurrentUser } from '../common/decorators/current-user.decorator'
 import { AuthGuard } from '../common/guards/auth.guard'
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe'
@@ -24,21 +25,33 @@ interface MeResponse {
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  // NestJS's ThrottlerGuard checks every route against every configured
+  // named throttler (AND logic), not just the one named in @Throttle().
+  // Without explicitly skipping the unrelated buckets here, this route
+  // would also be bound by e.g. the 'wallet' bucket's own default limit.
+  @Throttle({ auth: { limit: 5, ttl: 60_000 } })
+  @SkipThrottle({ billing: true, wallet: true })
   @Post('auth/google')
   loginWithGoogle(@Body(new ZodValidationPipe(googleAuthSchema)) dto: GoogleAuthDto) {
     return this.authService.loginWithGoogle(dto.idToken)
   }
 
+  @Throttle({ auth: { limit: 5, ttl: 60_000 } })
+  @SkipThrottle({ billing: true, wallet: true })
   @Post('auth/apple')
   loginWithApple(@Body(new ZodValidationPipe(appleAuthSchema)) dto: AppleAuthDto) {
     return this.authService.loginWithApple(dto.identityToken, dto.firstName, dto.lastName)
   }
 
+  @Throttle({ auth: { limit: 5, ttl: 60_000 } })
+  @SkipThrottle({ billing: true, wallet: true })
   @Post('auth/x')
   loginWithX(@Body(new ZodValidationPipe(xAuthSchema)) dto: XAuthDto) {
     return this.authService.loginWithX(dto.code, dto.codeVerifier, dto.redirectUri)
   }
 
+  @Throttle({ auth: { limit: 10, ttl: 60_000 } })
+  @SkipThrottle({ billing: true, wallet: true })
   @Post('auth/refresh')
   refresh(@Body(new ZodValidationPipe(refreshSchema)) dto: RefreshDto) {
     return this.authService.refresh(dto.refreshToken)

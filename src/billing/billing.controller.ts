@@ -1,8 +1,20 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common'
+import { SkipThrottle, Throttle } from '@nestjs/throttler'
 import { CurrentUser } from '../common/decorators/current-user.decorator'
 import { Roles } from '../common/decorators/roles.decorator'
 import { AuthGuard } from '../common/guards/auth.guard'
 import { RolesGuard } from '../common/guards/roles.guard'
+import { IdempotencyInterceptor } from '../common/interceptors/idempotency.interceptor'
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe'
 import {
   PlatformConfig,
@@ -53,8 +65,14 @@ export class BillingController {
     private readonly platformConfigService: PlatformConfigService,
   ) {}
 
+  // NestJS's ThrottlerGuard checks every route against every configured
+  // named throttler (AND logic), not just the one named in @Throttle().
+  // Skip the unrelated buckets so this route is bound only by 'billing'.
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('PROVIDER', 'CONSUMER')
+  @Throttle({ billing: { limit: 20, ttl: 60_000 } })
+  @SkipThrottle({ auth: true, wallet: true })
+  @UseInterceptors(IdempotencyInterceptor)
   @Post('load')
   async load(
     @CurrentUser() user: User,
