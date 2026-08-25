@@ -1,0 +1,141 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false  # never cancel a deploy mid-flight
+
+env:
+  IMAGE_OWNER: devfreeguy
+  REPO_NAME: powrth-server
+  IMAGE_BASE: ghcr.io/devfreeguy/powrth-server-api
+
+jobs:
+  # ── Job 1: Verify ────────────────────────────────────────────────────────────
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Create dummy .env for Prisma generate
+        # process.loadEnvFile() is called in prisma.config.ts.
+        # A minimal .env satisfies the call without throwing in CI.
+        run: echo "DATABASE_URL=postgresql://ci:ci@localhost:5432/ci" > .env
+
+      - name: Generate Prisma client
+        run: pnpm prisma generate
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Lint
+        run: pnpm run lint
+
+  # ── Job 2: Build and push ────────────────────────────────────────────────────
+  build-and-push:
+    name: Build and Push
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ steps.meta.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract image metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_BASE }}
+          tags: |
+            type=sha,prefix=sha-,format=short
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push multi-platform image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ── Job 3: Deploy ─────────────────────────────────────────────────────────────
+  deploy:
+    name: Deploy
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync deploy files to server
+        # Syncs compose.yml and scripts/ — never syncs .env
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          source: "deploy/compose.yml,deploy/scripts/"
+          target: /opt/apps/powrth/
+          strip_components: 1
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          envs: GHCR_TOKEN,GITHUB_ACTOR,IMAGE_TAG
+          script: |
+            # Authenticate with GHCR using the workflow's token (read-only, scoped to this run)
+            echo "${GHCR_TOKEN}" | docker login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin
+
+            chmod +x /opt/apps/powrth/scripts/deploy.sh
+
+            IMAGE_OWNER=devfreeguy \
+            REPO_NAME=powrth-server \
+            IMAGE_TAG="${IMAGE_TAG}" \
+            bash /opt/apps/powrth/scripts/deploy.sh
