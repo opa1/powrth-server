@@ -8,10 +8,17 @@ RUN corepack enable
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
-# Generate Prisma client before compiling TypeScript (types are needed for tsc)
+# Generate Prisma client before compiling TypeScript (types are needed for tsc).
+# `prisma generate` never connects to the database — it only reads the schema
+# to generate types — but prisma.config.ts validates that DATABASE_URL
+# resolves at config-load time regardless. No .env exists at this build
+# stage, so a dummy value satisfies that check; it's removed immediately
+# after so nothing leaks into later layers or the production stage.
 COPY prisma ./prisma
 COPY prisma.config.ts ./
-RUN pnpm prisma generate
+RUN echo "DATABASE_URL=postgresql://build:build@localhost:5432/build" > .env && \
+    pnpm prisma generate && \
+    rm .env
 
 COPY tsconfig.json tsconfig.build.json nest-cli.json ./
 COPY src ./src
