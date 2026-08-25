@@ -13,7 +13,7 @@ COPY prisma ./prisma
 COPY prisma.config.ts ./
 RUN pnpm prisma generate
 
-COPY tsconfig.json nest-cli.json ./
+COPY tsconfig.json tsconfig.build.json nest-cli.json ./
 COPY src ./src
 RUN pnpm run build
 
@@ -26,17 +26,14 @@ ENV NODE_ENV=production
 
 RUN corepack enable
 
-# Install production dependencies only
+# Install production dependencies only. `prisma` (the CLI) is a real
+# dependency — not just carried over from the builder — because deploy.sh
+# runs `prisma migrate deploy` via a one-off container using this image.
+# pnpm's node_modules is symlink-based (no top-level path per transitive
+# package), so cherry-picking node_modules paths across build stages isn't
+# reliable; installing it directly here is what actually works.
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile --prod
-
-# ── Prisma CLI ────────────────────────────────────────────────────────────────
-# Carried over from builder so deploy.sh can run `prisma migrate deploy`
-# via a one-off container before the app starts.
-# Only the CLI package and engine binaries are copied — no other devDeps.
-COPY --from=builder /app/node_modules/.bin/prisma        ./node_modules/.bin/prisma
-COPY --from=builder /app/node_modules/prisma             ./node_modules/prisma
-COPY --from=builder /app/node_modules/@prisma/engines     ./node_modules/@prisma/engines
 
 # ── Application ───────────────────────────────────────────────────────────────
 COPY --from=builder /app/dist ./dist

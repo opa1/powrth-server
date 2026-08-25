@@ -1,5 +1,6 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '../config/config.service'
+import { resolveNetworkConfig } from '../config/network.config'
 import { DatabaseService } from '../database/database.service'
 
 interface HeliusTokenTransfer {
@@ -11,16 +12,20 @@ interface HeliusTokenTransfer {
 @Injectable()
 export class DepositService {
   private readonly logger = new Logger(DepositService.name)
+  private readonly usdcMintAddress: string
+  private readonly webhookSecret: string
 
   constructor(
     private readonly db: DatabaseService,
     private readonly configService: ConfigService,
-  ) {}
+  ) {
+    const net = resolveNetworkConfig(this.configService)
+    this.usdcMintAddress = net.usdcMintAddress
+    this.webhookSecret = net.heliusWebhookSecret
+  }
 
   async processHeliusWebhook(payload: any[], incomingAuthHeader: string): Promise<void> {
-    const expected = this.configService.get('HELIUS_WEBHOOK_SECRET')
-
-    if (incomingAuthHeader !== expected) {
+    if (incomingAuthHeader !== this.webhookSecret) {
       throw new UnauthorizedException('Invalid webhook signature')
     }
 
@@ -45,7 +50,7 @@ export class DepositService {
       return
     }
 
-    const usdcMint = this.configService.get('USDC_MINT_ADDRESS')
+    const usdcMint = this.usdcMintAddress
 
     for (const transfer of tokenTransfers) {
       if (transfer.mint !== usdcMint) {

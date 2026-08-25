@@ -8,7 +8,7 @@ on:
 
 concurrency:
   group: deploy-production
-  cancel-in-progress: false  # never cancel a deploy mid-flight
+  cancel-in-progress: false # never cancel a deploy mid-flight
 
 env:
   IMAGE_OWNER: devfreeguy
@@ -26,6 +26,10 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           run_install: false
+        # No `version:` pin here — pnpm/action-setup reads it from the
+        # `packageManager` field in package.json, the single source of truth
+        # also used by Docker's `corepack enable`. Keeps CI and image builds
+        # on the same pnpm version without maintaining two separate pins.
 
       - uses: actions/setup-node@v4
         with:
@@ -61,7 +65,7 @@ jobs:
       contents: read
       packages: write
     outputs:
-      image_tag: ${{ steps.meta.outputs.version }}
+      image_tag: ${{ steps.image_tag.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
 
@@ -77,6 +81,16 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Computed explicitly rather than read from metadata-action's `version`
+      # output: with both a sha tag and a raw `latest` tag configured below,
+      # `version` resolves to whichever has the higher default priority —
+      # `raw` (200) beats `sha` (100), so it silently picks `latest`. That
+      # breaks the rollback story in deploy/README.md, which depends on
+      # image.env recording a real, immutable per-commit tag.
+      - name: Compute image tag
+        id: image_tag
+        run: echo "tag=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
       - name: Extract image metadata
         id: meta

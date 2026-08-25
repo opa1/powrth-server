@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { DatabaseService } from '../database/database.service'
 import { Consumer, Meter, MeterStatus, Provider, User } from '../generated/prisma/client'
+import { HeliusWebhookService } from '../helius/helius-webhook.service'
 import { MeterSummary } from '../meters/meters.service'
 
 type AdminUserSelect = Pick<
@@ -70,7 +71,10 @@ const MAX_TAKE = 50
 
 @Injectable()
 export class AdminService {
-  constructor(private readonly db: DatabaseService) {}
+  constructor(
+    private readonly db: DatabaseService,
+    private readonly heliusWebhookService: HeliusWebhookService,
+  ) {}
 
   async getPlatformOverview(): Promise<PlatformOverview> {
     const [
@@ -240,6 +244,12 @@ export class AdminService {
     }
 
     await this.db.user.update({ where: { id: userId }, data: { isActive } })
+
+    if (isActive) {
+      await this.heliusWebhookService.addAddress(user.walletAddress)
+    } else {
+      await this.heliusWebhookService.removeAddress(user.walletAddress)
+    }
   }
 
   private toUserSummary(user: AdminUserSelect): AdminUserSummary {

@@ -4,6 +4,7 @@ import { Test } from '@nestjs/testing'
 import * as crypto from 'node:crypto'
 import { ConfigService } from '../config/config.service'
 import { DatabaseService } from '../database/database.service'
+import { HeliusWebhookService } from '../helius/helius-webhook.service'
 import { UsersService } from '../users/users.service'
 import { WalletService } from '../wallet/wallet.service'
 import { AuthService } from './auth.service'
@@ -54,6 +55,10 @@ describe('AuthService', () => {
         UsersService,
         { provide: DatabaseService, useValue: db },
         { provide: WalletService, useValue: walletService },
+        {
+          provide: HeliusWebhookService,
+          useValue: { addAddress: jest.fn(), removeAddress: jest.fn() },
+        },
         { provide: ConfigService, useValue: { get: jest.fn() } },
         { provide: JwtService, useValue: new JwtService({ secret: 'test-secret' }) },
         { provide: GoogleStrategy, useValue: googleStrategy },

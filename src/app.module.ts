@@ -9,6 +9,7 @@ import { ConfigModule } from './config/config.module'
 import { ConsumersModule } from './consumers/consumers.module'
 import { DatabaseModule } from './database/database.module'
 import { HealthModule } from './health/health.module'
+import { HeliusModule } from './helius/helius.module'
 import { MetersModule } from './meters/meters.module'
 import { ProvidersModule } from './providers/providers.module'
 import { UsersModule } from './users/users.module'
@@ -20,6 +21,7 @@ import { WebhooksModule } from './webhooks/webhooks.module'
     ConfigModule,
     DatabaseModule,
     CommonModule,
+    HeliusModule,
     ThrottlerModule.forRootAsync({
       imports: [ConfigModule],
       inject: [],

@@ -13,11 +13,17 @@ export const envSchema = z.object({
   X_CLIENT_ID: z.string().min(1),
   X_CLIENT_SECRET: z.string().min(1),
   HELIUS_API_KEY: z.string().min(1),
-  HELIUS_WEBHOOK_SECRET: z.string().min(1),
-  SOLANA_RPC_URL: z.string().min(1),
+  HELIUS_WEBHOOK_SECRET_MAINNET: z.string().min(1),
+  HELIUS_WEBHOOK_SECRET_DEVNET: z.string().min(1),
+  HELIUS_WEBHOOK_ID_MAINNET: z.string().min(1).optional(),
+  HELIUS_WEBHOOK_ID_DEVNET: z.string().min(1).optional(),
+  NETWORK: z.enum(['mainnet', 'devnet']).default('devnet'),
+  SOLANA_RPC_URL_MAINNET: z.string().min(1),
+  SOLANA_RPC_URL_DEVNET: z.string().min(1),
+  USDC_MINT_ADDRESS_MAINNET: z.string().min(1),
+  USDC_MINT_ADDRESS_DEVNET: z.string().min(1),
   PLATFORM_FEE_RATE: z.coerce.number().default(0.02),
   TCP_PORT: z.coerce.number().int().default(8765),
-  USDC_MINT_ADDRESS: z.string().min(1),
 })
 
 export type EnvConfig = z.infer<typeof envSchema>

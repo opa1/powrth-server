@@ -8,6 +8,7 @@ import { Connection, Keypair, PublicKey } from '@solana/web3.js'
 import { mnemonicToSeedSync } from 'bip39'
 import { derivePath } from 'ed25519-hd-key'
 import { ConfigService } from '../config/config.service'
+import { resolveNetworkConfig } from '../config/network.config'
 import { DatabaseService } from '../database/database.service'
 
 const USDC_DECIMALS = 1_000_000
@@ -16,12 +17,16 @@ const USDC_DECIMALS = 1_000_000
 export class WalletService {
   private readonly logger = new Logger(WalletService.name)
   private readonly connection: Connection
+  private readonly usdcMintAddress: string
 
   constructor(
     private readonly configService: ConfigService,
     private readonly db: DatabaseService,
   ) {
-    this.connection = new Connection(this.configService.get('SOLANA_RPC_URL'), 'confirmed')
+    const net = resolveNetworkConfig(this.configService)
+    this.connection = new Connection(net.rpcUrl, 'confirmed')
+    this.usdcMintAddress = net.usdcMintAddress
+    console.log(`[Wallet] Network: ${net.network} | RPC: ${net.rpcUrl}`)
   }
 
   // Deliberately duplicated with deriveKeypair rather than sharing code: this method's
@@ -43,7 +48,7 @@ export class WalletService {
   async getOnChainUsdcBalance(walletAddress: string): Promise<number> {
     try {
       const publicKey = new PublicKey(walletAddress)
-      const usdcMint = new PublicKey(this.configService.get('USDC_MINT_ADDRESS'))
+      const usdcMint = new PublicKey(this.usdcMintAddress)
       const ata = getAssociatedTokenAddressSync(usdcMint, publicKey)
 
       const account = await getAccount(this.connection, ata)

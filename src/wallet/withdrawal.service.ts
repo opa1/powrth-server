@@ -20,6 +20,7 @@ import {
 } from '@solana/web3.js'
 import { PlatformConfigService } from '../billing/platform-config.service'
 import { ConfigService } from '../config/config.service'
+import { resolveNetworkConfig } from '../config/network.config'
 import { DatabaseService } from '../database/database.service'
 import { Withdrawal } from '../generated/prisma/client'
 import { WalletService } from './wallet.service'
@@ -36,13 +37,16 @@ const USDC_DECIMAL_FACTOR = 1_000_000
 @Injectable()
 export class WithdrawalService {
   private readonly logger = new Logger(WithdrawalService.name)
+  private readonly usdcMintAddress: string
 
   constructor(
     private readonly db: DatabaseService,
     private readonly walletService: WalletService,
     private readonly platformConfigService: PlatformConfigService,
     private readonly configService: ConfigService,
-  ) {}
+  ) {
+    this.usdcMintAddress = resolveNetworkConfig(this.configService).usdcMintAddress
+  }
 
   async requestWithdrawal(input: RequestWithdrawalInput): Promise<Withdrawal> {
     const config = await this.platformConfigService.getConfig()
@@ -82,7 +86,7 @@ export class WithdrawalService {
     try {
       const keypair = await this.walletService.deriveKeypairForUser(input.callerUserId)
       const connection = this.walletService.getConnection()
-      const usdcMint = new PublicKey(this.configService.get('USDC_MINT_ADDRESS'))
+      const usdcMint = new PublicKey(this.usdcMintAddress)
       const fromPubkey = keypair.publicKey
       const toPubkey = new PublicKey(input.toWalletAddress)
 

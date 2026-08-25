@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { DatabaseService } from '../database/database.service'
 import { Role, User } from '../generated/prisma/client'
+import { HeliusWebhookService } from '../helius/helius-webhook.service'
 import { WalletService } from '../wallet/wallet.service'
 
 type SocialProvider = 'google' | 'apple' | 'x'
@@ -33,6 +34,7 @@ export class UsersService {
   constructor(
     private readonly db: DatabaseService,
     private readonly walletService: WalletService,
+    private readonly heliusWebhookService: HeliusWebhookService,
   ) {}
 
   async findById(id: string): Promise<User | null> {
@@ -81,6 +83,10 @@ export class UsersService {
           return tx.user.create({ data: { ...baseData, xId: input.providerId } })
       }
     })
+
+    // Runs after the transaction commits — this is an external HTTP call and
+    // must never hold the DB transaction open while it's in flight.
+    await this.heliusWebhookService.addAddress(user.walletAddress)
 
     return { user, isNewUser: true }
   }
