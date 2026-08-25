@@ -11,9 +11,9 @@ concurrency:
   cancel-in-progress: false # never cancel a deploy mid-flight
 
 env:
-  IMAGE_OWNER: devfreeguy
+  IMAGE_OWNER: opa1
   REPO_NAME: powrth-server
-  IMAGE_BASE: ghcr.io/devfreeguy/powrth-server-api
+  IMAGE_BASE: ghcr.io/opa1/powrth-server-api
 
 jobs:
   # ── Job 1: Verify ────────────────────────────────────────────────────────────
@@ -149,7 +149,7 @@ jobs:
 
             chmod +x /opt/apps/powrth/scripts/deploy.sh
 
-            IMAGE_OWNER=devfreeguy \
+            IMAGE_OWNER=opa1 \
             REPO_NAME=powrth-server \
             IMAGE_TAG="${IMAGE_TAG}" \
             bash /opt/apps/powrth/scripts/deploy.sh

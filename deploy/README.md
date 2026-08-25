@@ -37,7 +37,7 @@ This file tells systemd which image to start on boot.
 
 ```bash
 cat > /opt/apps/powrth/image.env << 'EOF'
-IMAGE_OWNER=devfreeguy
+IMAGE_OWNER=opa1
 REPO_NAME=powrth-server
 IMAGE_TAG=latest
 EOF
@@ -89,7 +89,7 @@ For manual pulls or systemd restarts without CI, the server needs its own creden
 
 ```bash
 # Use a GitHub PAT with read:packages scope
-echo "YOUR_PAT" | docker login ghcr.io -u devfreeguy --password-stdin
+echo "YOUR_PAT" | docker login ghcr.io -u [username] --password-stdin
 ```
 
 Docker stores the credentials in `~/.docker/config.json`.
@@ -131,7 +131,7 @@ To redeploy a previous version manually on the server:
 ```bash
 cd /opt/apps/powrth
 
-IMAGE_OWNER=devfreeguy \
+IMAGE_OWNER=opa1 \
 REPO_NAME=powrth-server \
 IMAGE_TAG=sha-PREVIOUS \
 bash scripts/deploy.sh
