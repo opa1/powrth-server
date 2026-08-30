@@ -8,6 +8,8 @@ set -euo pipefail
 : "${IMAGE_OWNER:?IMAGE_OWNER is required}"
 : "${REPO_NAME:?REPO_NAME is required}"
 : "${IMAGE_TAG:?IMAGE_TAG is required}"
+: "${GHCR_USER:?GHCR_USER is required}"
+: "${GHCR_TOKEN:?GHCR_TOKEN is required}"
 
 # ─── Constants ────────────────────────────────────────────────────────────────
 APP_DIR="/opt/apps/powrth"
@@ -30,10 +32,19 @@ echo "[deploy] Target:   ${IMAGE}"
 echo "[deploy] ──────────────────────────────────────────────────"
 
 # ─── Step 1: Pull new image ───────────────────────────────────────────────────
+# Ephemeral GHCR auth: this server can't hold persistent credentials for
+# multiple GitHub accounts, so log in just for the pull and log out right
+# after. `set -e` ensures a failed login aborts before anything is touched.
+echo "[deploy] Logging in to GHCR..."
+echo "${GHCR_TOKEN}" | docker login ghcr.io -u "${GHCR_USER}" --password-stdin
+
 # Pull before touching the running container.
 # If the pull fails, the old container keeps running unaffected.
 echo "[deploy] Pulling image..."
 docker pull "${IMAGE}"
+
+echo "[deploy] Logging out of GHCR..."
+docker logout ghcr.io
 
 # ─── Step 2: Run database migrations ─────────────────────────────────────────
 # One-off container using the new image. Runs against the shared postgres
